@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>남영훈 | Android Engineer Portfolio</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-    <script>
-        try {
-            if (sessionStorage.getItem('portfolioAppLaunched') === '1') {
-                document.documentElement.classList.add('portfolio-skip-launch');
-            }
-        } catch (e) { /* private mode 등 */ }
-    </script>
     <style>
         :root {
             --point-color: #3182f6;
@@ -244,7 +237,6 @@
             }
         }
 
-        html.portfolio-skip-launch .launch-overlay,
         .launch-overlay.launch-overlay--done {
             animation: none;
             opacity: 0;
@@ -1191,9 +1183,6 @@
 
     function runLaunch() {
         if (!phoneScreen || phoneScreen.classList.contains('is-launched')) return;
-        try {
-            sessionStorage.setItem('portfolioAppLaunched', '1');
-        } catch (e) { /* ignore */ }
         phoneScreen.classList.add('is-launched');
         if (launchOverlay) {
             var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1210,11 +1199,7 @@
         updateFab();
     }
 
-    if (document.documentElement.classList.contains('portfolio-skip-launch')) {
-        if (phoneScreen) phoneScreen.classList.add('is-launched');
-        finishLaunchOverlay();
-        updateFab();
-    } else if (launchBtn && phoneScreen) {
+    if (launchBtn && phoneScreen) {
         launchBtn.addEventListener('click', runLaunch);
     } else if (phoneScreen) {
         phoneScreen.classList.add('is-launched');
