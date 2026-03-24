@@ -106,12 +106,25 @@
             border-radius: inherit;
             display: flex;
             flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 0;
+            padding: 0;
+            overflow: hidden;
+            pointer-events: auto;
+        }
+
+        .launch-overlay-main {
+            flex: 1 1 auto;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 14px;
             padding: 24px;
-            overflow: hidden;
-            pointer-events: auto;
+            position: relative;
+            z-index: 2;
         }
 
         .launch-wallpaper {
@@ -130,6 +143,17 @@
             background: radial-gradient(circle at 50% 88%, rgba(255, 255, 255, 0.12) 0%, transparent 45%);
             z-index: 1;
             pointer-events: none;
+        }
+
+        .status-bar--launch {
+            position: relative;
+            z-index: 3;
+            flex-shrink: 0;
+            color: #fff;
+            background: rgba(8, 20, 48, 0.42);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .launch-app-btn {
@@ -184,6 +208,7 @@
         .launch-hint {
             position: relative;
             z-index: 2;
+            text-align: center;
             margin: 0;
             font-size: 0.82rem;
             font-weight: 600;
@@ -830,11 +855,20 @@
     <div class="screen" id="phoneScreen">
         <div class="launch-overlay" id="launchOverlay" role="dialog" aria-modal="true" aria-labelledby="launchAppLabel">
             <div class="launch-wallpaper" aria-hidden="true"></div>
-            <button type="button" class="launch-app-btn" id="launchAppBtn" aria-labelledby="launchAppLabel">
-                <span class="launch-app-icon" aria-hidden="true">📱</span>
-                <span class="launch-app-label" id="launchAppLabel">Portfolio</span>
-            </button>
-            <p class="launch-hint">탭하여 열기</p>
+            <div class="status-bar status-bar--launch">
+                <span>12:45</span>
+                <div style="display: flex; gap: 8px;">
+                    <span>📶</span>
+                    <span>🔋 92%</span>
+                </div>
+            </div>
+            <div class="launch-overlay-main">
+                <button type="button" class="launch-app-btn" id="launchAppBtn" aria-labelledby="launchAppLabel">
+                    <span class="launch-app-icon" aria-hidden="true">📱</span>
+                    <span class="launch-app-label" id="launchAppLabel">Portfolio</span>
+                </button>
+                <p class="launch-hint">탭하여 열기</p>
+            </div>
         </div>
         <div class="screen-scroll">
         <div class="status-bar">
