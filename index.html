@@ -582,10 +582,14 @@
                 padding: 8px;
                 border: 3px solid #303030;
                 max-width: 100%;
+                width: 100%;
                 min-height: 0;
-                max-height: calc(100dvh - max(20px, env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px)));
+                /* 뷰포트 안에 고정 → 바깥은 배경만 보이고 스크롤은 .screen-scroll */
+                height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+                max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
                 box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.48);
                 margin: 0 auto;
+                overflow: hidden;
             }
 
             .phone-notch {
@@ -629,6 +633,29 @@
 
             .status-badge {
                 max-width: 100%;
+            }
+
+            /* 좁은 폭에서 minmax(300px) 열이 뷰보다 커져 이메일/학력 등이 가로로 잘림 → 1열 + 줄바꿈 */
+            .personal-info {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .info-item,
+            .info-item--edu {
+                min-width: 0;
+            }
+
+            .info-item,
+            .info-item--edu span {
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+
+            /* 노치·상단 라운드와 겹치지 않도록 스테이터스 영역 확보 */
+            .status-bar {
+                min-height: 44px;
+                padding-top: 10px;
+                padding-bottom: 6px;
             }
         }
 
