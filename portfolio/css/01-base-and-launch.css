@@ -1,0 +1,257 @@
+:root {
+    --point-color: #3182f6;
+    --m3-primary: var(--point-color);
+    --m3-primary-container: #d3e4ff;
+    --m3-on-primary-container: #001c38;
+    --m3-surface: #f8faff;
+    --m3-surface-variant: #e1e2ec;
+    --m3-on-surface: #1b1b1f;
+    --m3-on-surface-variant: #4e5968;
+    --m3-outline: #74777f;
+    --m3-card: #ffffff;
+    --point-light: #e8f3ff;
+    --border-color: #e9ecef;
+    --active-color: #ff9800;
+    --danger-color: #f44336;
+    --phone-bezel: #1b1b1f;
+    --shadow-layered: 0 2px 4px rgba(0, 0, 0, 0.02), 0 8px 16px rgba(0, 0, 0, 0.04), 10px 10px 30px rgba(0, 0, 0, 0.08);
+    --bottom-nav-height: 56px;
+    --top-chrome-height: 43px;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Pretendard', sans-serif;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #e0e2ec;
+    color: var(--m3-on-surface);
+    margin: 0;
+    line-height: 1.6;
+    word-break: keep-all;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+.phone-frame {
+    width: 100%;
+    max-width: 900px;
+    background: var(--phone-bezel);
+    padding: 12px;
+    border-radius: 56px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 4px solid #303030;
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-notch {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 10;
+}
+
+/* 스크롤은 .screen-scroll — FAB는 .screen 위에 고정 */
+.screen {
+    background-color: var(--m3-surface);
+    border-radius: 44px 44px 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: calc(90vh - 56px);
+    position: relative;
+}
+
+.screen-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 홈 화면 → 앱 실행 연출 */
+.launch-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 25;
+    border-radius: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+.launch-overlay-main {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px;
+    position: relative;
+    z-index: 2;
+}
+
+.launch-wallpaper {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(255, 255, 255, 0.18) 0%, transparent 55%),
+        linear-gradient(168deg, #0d47a1 0%, #1565c0 35%, #42a5f5 70%, #90caf9 100%);
+    z-index: 0;
+}
+
+.launch-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 88%, rgba(255, 255, 255, 0.12) 0%, transparent 45%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.status-bar--launch {
+    position: relative;
+    z-index: 3;
+    flex-shrink: 0;
+    color: #fff;
+    background: rgba(8, 20, 48, 0.42);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.launch-app-btn {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #fff;
+    -webkit-tap-highlight-color: transparent;
+    transform-origin: 50% 45%;
+}
+
+.launch-app-btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 6px;
+    border-radius: 20px;
+}
+
+.launch-app-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #3182f6 0%, #1e5fbf 100%);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.launch-app-btn:active .launch-app-icon {
+    transform: scale(0.94);
+}
+
+.launch-app-label {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+.launch-hint {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin: 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.88);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+    animation: launch-hint-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes launch-hint-pulse {
+    0%, 100% { opacity: 0.65; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(2px); }
+}
+
+.is-launched .launch-overlay {
+    transform-origin: 50% 42%;
+    animation: launch-open-zoom 1.25s cubic-bezier(0.28, 0.55, 0.18, 1) forwards;
+    pointer-events: none;
+}
+
+@keyframes launch-open-zoom {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(1);
+    }
+    55% {
+        filter: brightness(1.06);
+    }
+    100% {
+        transform: scale(3.2);
+        opacity: 0;
+        filter: brightness(1.15);
+    }
+}
+
+.launch-overlay.launch-overlay--done {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .launch-hint {
+        animation: none;
+        opacity: 0.9;
+    }
+
+    .is-launched .launch-overlay {
+        animation: launch-open-instant 0.2s ease-out forwards;
+    }
+
+    @keyframes launch-open-instant {
+        to {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+}
