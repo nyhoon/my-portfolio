@@ -858,21 +858,21 @@
         /* 모바일에서도 폰 껍데기 유지: 주변에 배경(#e0e2ec)이 보이도록 여백 + 라운드 베젤 */
         @media (max-width: 600px) {
             body {
-                padding: max(10px, env(safe-area-inset-top, 0px)) 12px max(14px, env(safe-area-inset-bottom, 0px));
+                padding: max(6px, env(safe-area-inset-top, 0px)) 6px max(8px, env(safe-area-inset-bottom, 0px));
                 min-height: 100dvh;
                 align-items: stretch;
             }
 
             .phone-frame {
                 border-radius: 36px;
-                padding: 8px;
-                border: 3px solid #303030;
+                padding: 6px;
+                border: 2px solid #303030;
                 max-width: 100%;
                 width: 100%;
                 min-height: 0;
                 /* 뷰포트 안에 고정 → 바깥은 배경만 보이고 스크롤은 .screen-scroll */
-                height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
-                max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+                height: calc(100dvh - 12px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+                max-height: calc(100dvh - 12px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
                 box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.48);
                 margin: 0 auto;
                 overflow: hidden;
