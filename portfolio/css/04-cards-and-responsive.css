@@ -225,6 +225,35 @@
         word-break: break-word;
     }
 
+    .personal-info > .info-item:nth-child(-n+2) {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: baseline;
+        gap: 6px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        overflow-wrap: normal;
+        word-break: normal;
+        scrollbar-width: none;
+    }
+
+    .personal-info > .info-item:nth-child(-n+2)::-webkit-scrollbar {
+        display: none;
+    }
+
+    .personal-info > .info-item:nth-child(-n+2) b {
+        flex-shrink: 0;
+    }
+
+    .personal-info > .info-item:nth-child(-n+2) .contact-link {
+        white-space: nowrap;
+        overflow-wrap: normal;
+        word-break: normal;
+        flex: 0 0 auto;
+        font-size: 0.88rem;
+    }
+
     /* 노치·상단 라운드와 겹치지 않도록 스테이터스 영역 확보 */
     .status-bar {
         min-height: 44px;
