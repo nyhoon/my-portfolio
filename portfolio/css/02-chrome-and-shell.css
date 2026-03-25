@@ -1,0 +1,205 @@
+
+.screen-top-chrome {
+    position: sticky;
+    top: 0;
+    z-index: 6;
+    background: var(--m3-surface);
+}
+
+.screen-top-chrome .status-bar {
+    position: relative;
+    top: auto;
+}
+
+.scroll-progress {
+    height: 3px;
+    background: rgba(27, 27, 31, 0.08);
+    overflow: hidden;
+}
+
+.scroll-progress__fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--point-color), #5b9cf9);
+    border-radius: 0 2px 2px 0;
+    transition: width 0.08s linear;
+}
+
+.bottom-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-height: var(--bottom-nav-height);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 2px;
+    padding: 6px 6px 4px;
+    background: rgba(248, 250, 255, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border-color);
+    z-index: 7;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.bottom-nav__btn {
+    flex: 1;
+    max-width: 88px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2px;
+    padding: 4px 2px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--m3-on-surface-variant);
+    font-family: inherit;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-nav__btn:hover {
+    color: var(--m3-on-surface);
+    background: rgba(49, 130, 246, 0.06);
+}
+
+.bottom-nav__btn:focus-visible {
+    outline: 2px solid var(--point-color);
+    outline-offset: 1px;
+}
+
+.bottom-nav__btn.is-active {
+    color: var(--point-color);
+}
+
+.bottom-nav__icon {
+    font-size: 1.15rem;
+    line-height: 1.2;
+}
+
+.bottom-nav__label {
+    line-height: 1.15;
+    text-align: center;
+}
+
+.info-item--contact .info-item-contact-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.info-item-contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.contact-link {
+    color: var(--point-color);
+    font-weight: 700;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+.copy-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--m3-surface);
+    color: var(--m3-on-surface-variant);
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    border-color: var(--point-color);
+    color: var(--point-color);
+}
+
+.copy-btn:focus-visible {
+    outline: 2px solid var(--point-color);
+    outline-offset: 2px;
+}
+
+#portfolio-top,
+#section-about,
+#section-experience,
+#section-toy,
+#section-skills {
+    scroll-margin-top: calc(var(--top-chrome-height) + 8px);
+}
+
+.scroll-hint-fab {
+    position: absolute;
+    right: 14px;
+    bottom: calc(14px + var(--bottom-nav-height));
+    z-index: 8;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--point-color);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(49, 130, 246, 0.35), 0 8px 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.scroll-hint-fab svg {
+    width: 26px;
+    height: 26px;
+    animation: scroll-hint-nudge 1.8s ease-in-out infinite;
+}
+
+.scroll-hint-fab:hover {
+    background: #2563eb;
+    box-shadow: 0 6px 12px rgba(49, 130, 246, 0.45), 0 8px 28px rgba(0, 0, 0, 0.14);
+}
+
+.scroll-hint-fab:focus-visible {
+    outline: 2px solid var(--m3-primary-container);
+    outline-offset: 2px;
+}
+
+.scroll-hint-fab.scroll-hint-fab--hidden {
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+}
+
+@keyframes scroll-hint-nudge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-hint-fab svg {
+        animation: none;
+    }
+
+    .scroll-progress__fill {
+        transition: none;
+    }
+}
