@@ -1,0 +1,247 @@
+.project-card {
+    background: var(--m3-card);
+    border-radius: 24px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.project-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.badge.blue {
+    background: var(--point-color);
+    color: #fff;
+}
+
+.badge.outline {
+    background: var(--point-light);
+    color: var(--point-color);
+    border: 1px solid rgba(49, 130, 246, 0.2);
+}
+
+.tech-tag {
+    font-size: 0.8rem;
+    color: var(--m3-on-surface-variant);
+    background: var(--m3-surface);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    display: inline-block;
+    border: 1px solid var(--border-color);
+}
+
+.btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.link-btn {
+    display: inline-flex;
+    align-items: center;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.link-btn:hover {
+    background: var(--point-color);
+    transform: translateY(-2px);
+}
+
+.skill-box {
+    background: var(--m3-card);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.04);
+    margin-bottom: 12px;
+}
+
+.skill-box b {
+    display: block;
+    color: var(--point-color);
+    margin-bottom: 4px;
+}
+
+.badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tech-tags {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-tags .tech-tag {
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.toy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+/* 베젤 하단: 디스플레이 밖이라 본문과 절대 겹치지 않음 */
+.screen-bottom-bezel {
+    flex: 0 0 auto;
+    background: var(--m3-surface);
+    border-radius: 0 0 44px 44px;
+    padding: 10px 0 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-handle {
+    width: 108px;
+    height: 4px;
+    background: var(--m3-on-surface);
+    border-radius: 2px;
+    opacity: 0.22;
+}
+
+.highlight-red {
+    color: var(--danger-color);
+    font-weight: 700;
+}
+
+/* 모바일에서도 폰 껍데기 유지: 주변에 배경(#e0e2ec)이 보이도록 여백 + 라운드 베젤 */
+@media (max-width: 600px) {
+    body {
+        padding: max(10px, env(safe-area-inset-top, 0px)) 12px max(14px, env(safe-area-inset-bottom, 0px));
+        min-height: 100dvh;
+        align-items: stretch;
+    }
+
+    .phone-frame {
+        border-radius: 36px;
+        padding: 8px;
+        border: 3px solid #303030;
+        max-width: 100%;
+        width: 100%;
+        min-height: 0;
+        /* 뷰포트 안에 고정 → 바깥은 배경만 보이고 스크롤은 .screen-scroll */
+        height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+        max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+        box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.48);
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    .phone-notch {
+        display: block;
+        width: 96px;
+        height: 22px;
+        top: 18px;
+        border-radius: 16px;
+    }
+
+    .screen {
+        border-radius: 30px 30px 0 0;
+        max-height: none;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .screen-bottom-bezel {
+        border-radius: 0 0 30px 30px;
+    }
+
+    .experience-wrapper {
+        --timeline-pad: 20px;
+        margin-left: 5px;
+    }
+
+    .hero-name {
+        font-size: 2.5rem;
+    }
+
+    header {
+        padding: 28px 24px;
+        margin-bottom: 40px;
+        border-radius: 28px;
+    }
+
+    .header-hero-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .status-badge {
+        max-width: 100%;
+    }
+
+    /* 좁은 폭에서 minmax(300px) 열이 뷰보다 커져 이메일/학력 등이 가로로 잘림 → 1열 + 줄바꿈 */
+    .personal-info {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .info-item,
+    .info-item--edu {
+        min-width: 0;
+    }
+
+    .info-item,
+    .info-item--edu span {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    /* 노치·상단 라운드와 겹치지 않도록 스테이터스 영역 확보 */
+    .status-bar {
+        min-height: 44px;
+        padding-top: 10px;
+        padding-bottom: 6px;
+    }
+
+    :root {
+        --top-chrome-height: 50px;
+    }
+}
+
+.screen-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.screen-scroll::-webkit-scrollbar-thumb {
+    background: var(--m3-outline);
+    border-radius: 10px;
+}
