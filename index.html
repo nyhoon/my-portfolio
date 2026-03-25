@@ -23,6 +23,8 @@
             --danger-color: #f44336;
             --phone-bezel: #1b1b1f;
             --shadow-layered: 0 2px 4px rgba(0, 0, 0, 0.02), 0 8px 16px rgba(0, 0, 0, 0.04), 10px 10px 30px rgba(0, 0, 0, 0.08);
+            --bottom-nav-height: 56px;
+            --top-chrome-height: 43px;
         }
 
         * {
@@ -262,10 +264,156 @@
             }
         }
 
+        .screen-top-chrome {
+            position: sticky;
+            top: 0;
+            z-index: 6;
+            background: var(--m3-surface);
+        }
+
+        .screen-top-chrome .status-bar {
+            position: relative;
+            top: auto;
+        }
+
+        .scroll-progress {
+            height: 3px;
+            background: rgba(27, 27, 31, 0.08);
+            overflow: hidden;
+        }
+
+        .scroll-progress__fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--point-color), #5b9cf9);
+            border-radius: 0 2px 2px 0;
+            transition: width 0.08s linear;
+        }
+
+        .bottom-nav {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            min-height: var(--bottom-nav-height);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            gap: 2px;
+            padding: 6px 6px 4px;
+            background: rgba(248, 250, 255, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-color);
+            z-index: 7;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .bottom-nav__btn {
+            flex: 1;
+            max-width: 88px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2px;
+            padding: 4px 2px;
+            border: none;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--m3-on-surface-variant);
+            font-family: inherit;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bottom-nav__btn:hover {
+            color: var(--m3-on-surface);
+            background: rgba(49, 130, 246, 0.06);
+        }
+
+        .bottom-nav__btn:focus-visible {
+            outline: 2px solid var(--point-color);
+            outline-offset: 1px;
+        }
+
+        .bottom-nav__btn.is-active {
+            color: var(--point-color);
+        }
+
+        .bottom-nav__icon {
+            font-size: 1.15rem;
+            line-height: 1.2;
+        }
+
+        .bottom-nav__label {
+            line-height: 1.15;
+            text-align: center;
+        }
+
+        .info-item--contact .info-item-contact-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .info-item-contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-link {
+            color: var(--point-color);
+            font-weight: 700;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            flex-shrink: 0;
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--m3-surface);
+            color: var(--m3-on-surface-variant);
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--point-color);
+            color: var(--point-color);
+        }
+
+        .copy-btn:focus-visible {
+            outline: 2px solid var(--point-color);
+            outline-offset: 2px;
+        }
+
+        #portfolio-top,
+        #section-about,
+        #section-experience,
+        #section-toy,
+        #section-skills {
+            scroll-margin-top: calc(var(--top-chrome-height) + 8px);
+        }
+
         .scroll-hint-fab {
             position: absolute;
             right: 14px;
-            bottom: 18px;
+            bottom: calc(14px + var(--bottom-nav-height));
             z-index: 8;
             width: 52px;
             height: 52px;
@@ -315,6 +463,10 @@
             .scroll-hint-fab svg {
                 animation: none;
             }
+
+            .scroll-progress__fill {
+                transition: none;
+            }
         }
 
         .status-bar {
@@ -334,7 +486,7 @@
         }
 
         .container {
-            padding: 20px 24px 72px 24px;
+            padding: 20px 24px calc(88px + var(--bottom-nav-height)) 24px;
         }
 
         .header-top {
@@ -828,6 +980,10 @@
                 padding-top: 10px;
                 padding-bottom: 6px;
             }
+
+            :root {
+                --top-chrome-height: 50px;
+            }
         }
 
         .screen-scroll::-webkit-scrollbar {
@@ -848,7 +1004,7 @@
         <div class="launch-overlay" id="launchOverlay" role="dialog" aria-modal="true" aria-labelledby="launchAppLabel">
             <div class="launch-wallpaper" aria-hidden="true"></div>
             <div class="status-bar status-bar--launch">
-                <span>12:45</span>
+                <span class="js-status-clock" aria-hidden="true">00:00</span>
                 <div style="display: flex; gap: 8px;">
                     <span>📶</span>
                     <span>🔋 92%</span>
@@ -862,17 +1018,22 @@
                 <p class="launch-hint">탭하여 열기</p>
             </div>
         </div>
-        <div class="screen-scroll">
-        <div class="status-bar">
-            <span>12:45</span>
-            <div style="display: flex; gap: 8px;">
-                <span>📶</span>
-                <span>🔋 92%</span>
+        <div class="screen-scroll" id="screenScroll">
+        <div class="screen-top-chrome">
+            <div class="status-bar">
+                <span class="js-status-clock">00:00</span>
+                <div style="display: flex; gap: 8px;">
+                    <span aria-hidden="true">📶</span>
+                    <span aria-hidden="true">🔋 92%</span>
+                </div>
+            </div>
+            <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="페이지 스크롤 진행">
+                <div class="scroll-progress__fill" id="scrollProgressFill"></div>
             </div>
         </div>
 
         <div class="container">
-            <header>
+            <header id="portfolio-top">
                 <div class="header-top">
                     <div class="name-area">
                         <div class="header-hero-row">
@@ -883,8 +1044,24 @@
                     </div>
                 </div>
                 <div class="personal-info">
-                    <div class="info-item"><b>✉️ E-Mail</b> feelsogxxd@naver.com</div>
-                    <div class="info-item"><b>📞 Phone</b> 010-7192-7102</div>
+                    <div class="info-item info-item--contact">
+                        <div class="info-item-contact-row">
+                            <b>✉️ E-Mail</b>
+                            <div class="info-item-contact-actions">
+                                <a class="contact-link" href="mailto:feelsogxxd@naver.com">feelsogxxd@naver.com</a>
+                                <button type="button" class="copy-btn" data-copy="feelsogxxd@naver.com" aria-label="이메일 주소 복사">복사</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-item info-item--contact">
+                        <div class="info-item-contact-row">
+                            <b>📞 Phone</b>
+                            <div class="info-item-contact-actions">
+                                <a class="contact-link" href="tel:+821071927102">010-7192-7102</a>
+                                <button type="button" class="copy-btn" data-copy="010-7192-7102" aria-label="전화번호 복사">복사</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="info-item info-item--edu">
                         <b>🏫 High</b>
                         <span>흥진고등학교 졸업</span>
@@ -898,7 +1075,7 @@
                 </div>
             </header>
 
-            <section>
+            <section id="section-about">
                 <h2>🙋‍♂️ About me</h2>
                 <div class="about-grid">
                     <div class="about-card"><div class="about-icon">🚀</div><div class="about-content">앱 설계부터 스토어 릴리즈, 운영 관리까지 서비스 전 사이클 경험</div></div>
@@ -909,7 +1086,7 @@
                 </div>
             </section>
 
-            <section>
+            <section id="section-experience">
                 <h2>💼 Experience</h2>
                 <div class="experience-wrapper">
                     <div class="company-group active">
@@ -1090,7 +1267,7 @@
                 </div>
             </section>
 
-            <section>
+            <section id="section-toy">
                 <h2>💻 Toy Projects</h2>
                 <div class="toy-grid">
                     <div class="project-card">
@@ -1120,7 +1297,7 @@
                 </div>
             </section>
 
-            <section>
+            <section id="section-skills">
                 <h2>🎒 Skills & Tools</h2>
                 <div class="skills-container">
                     <div class="skill-box"><b>Languages</b>Kotlin, Java, Python, Dart, PHP</div>
@@ -1135,6 +1312,28 @@
             </footer>
         </div>
         </div>
+        <nav class="bottom-nav" id="bottomNav" aria-label="섹션 이동">
+            <button type="button" class="bottom-nav__btn is-active" data-section="portfolio-top" aria-current="page">
+                <span class="bottom-nav__icon" aria-hidden="true">🏠</span>
+                <span class="bottom-nav__label">홈</span>
+            </button>
+            <button type="button" class="bottom-nav__btn" data-section="section-about">
+                <span class="bottom-nav__icon" aria-hidden="true">👤</span>
+                <span class="bottom-nav__label">About</span>
+            </button>
+            <button type="button" class="bottom-nav__btn" data-section="section-experience">
+                <span class="bottom-nav__icon" aria-hidden="true">💼</span>
+                <span class="bottom-nav__label">경력</span>
+            </button>
+            <button type="button" class="bottom-nav__btn" data-section="section-toy">
+                <span class="bottom-nav__icon" aria-hidden="true">🧩</span>
+                <span class="bottom-nav__label">Toy</span>
+            </button>
+            <button type="button" class="bottom-nav__btn" data-section="section-skills">
+                <span class="bottom-nav__icon" aria-hidden="true">🛠</span>
+                <span class="bottom-nav__label">스킬</span>
+            </button>
+        </nav>
         <button type="button" class="scroll-hint-fab" id="scrollHintFab" aria-label="아래로 더 보기" title="스크롤">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M6 9l6 6 6-6"/>
@@ -1149,11 +1348,94 @@
 
 <script>
 (function () {
-    var scrollEl = document.querySelector('.screen-scroll');
+    var scrollEl = document.getElementById('screenScroll') || document.querySelector('.screen-scroll');
     var fab = document.getElementById('scrollHintFab');
     var phoneScreen = document.getElementById('phoneScreen');
     var launchOverlay = document.getElementById('launchOverlay');
     var launchBtn = document.getElementById('launchAppBtn');
+    var bottomNav = document.getElementById('bottomNav');
+    var progressFill = document.getElementById('scrollProgressFill');
+    var progressEl = document.getElementById('scrollProgress');
+    var sectionOrder = ['portfolio-top', 'section-about', 'section-experience', 'section-toy', 'section-skills'];
+
+    function prefersReducedMotion() {
+        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function tickClock() {
+        var label = new Date().toLocaleTimeString('ko-KR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+        document.querySelectorAll('.js-status-clock').forEach(function (node) {
+            node.textContent = label;
+        });
+    }
+
+    function updateProgress() {
+        if (!scrollEl || !progressFill || !progressEl) return;
+        var max = scrollEl.scrollHeight - scrollEl.clientHeight;
+        var pct = max <= 0 ? 0 : Math.round((scrollEl.scrollTop / max) * 100);
+        progressFill.style.width = pct + '%';
+        progressEl.setAttribute('aria-valuenow', String(pct));
+    }
+
+    function updateNavActive() {
+        if (!scrollEl || !bottomNav) return;
+        var pad = 56;
+        var st = scrollEl.scrollTop;
+        var activeId = sectionOrder[0];
+        for (var i = 0; i < sectionOrder.length; i++) {
+            var el = document.getElementById(sectionOrder[i]);
+            if (!el) continue;
+            var top = el.getBoundingClientRect().top - scrollEl.getBoundingClientRect().top + scrollEl.scrollTop;
+            if (top <= st + pad) {
+                activeId = sectionOrder[i];
+            }
+        }
+        bottomNav.querySelectorAll('.bottom-nav__btn').forEach(function (btn) {
+            var sec = btn.getAttribute('data-section');
+            var on = sec === activeId;
+            btn.classList.toggle('is-active', on);
+            if (on) {
+                btn.setAttribute('aria-current', 'page');
+            } else {
+                btn.removeAttribute('aria-current');
+            }
+        });
+    }
+
+    function scrollToSection(sectionId) {
+        var el = document.getElementById(sectionId);
+        if (!el) return;
+        var smooth = !prefersReducedMotion();
+        el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    }
+
+    function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text);
+            return;
+        }
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+        } catch (e) { /* ignore */ }
+        document.body.removeChild(ta);
+    }
+
+    function onScrollUi() {
+        updateFab();
+        updateProgress();
+        updateNavActive();
+    }
 
     function updateFab() {
         if (!scrollEl || !fab) return;
@@ -1164,14 +1446,33 @@
     }
 
     if (scrollEl && fab) {
-        scrollEl.addEventListener('scroll', updateFab, { passive: true });
-        window.addEventListener('resize', updateFab);
+        scrollEl.addEventListener('scroll', onScrollUi, { passive: true });
+        window.addEventListener('resize', onScrollUi);
         fab.addEventListener('click', function () {
             var step = Math.min(scrollEl.clientHeight * 0.85, scrollEl.scrollHeight - scrollEl.scrollTop - scrollEl.clientHeight);
             if (step < 8) return;
-            scrollEl.scrollBy({ top: step, behavior: 'smooth' });
+            scrollEl.scrollBy({ top: step, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
         });
     }
+
+    if (bottomNav) {
+        bottomNav.querySelectorAll('.bottom-nav__btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var id = btn.getAttribute('data-section');
+                if (id) scrollToSection(id);
+            });
+        });
+    }
+
+    document.querySelectorAll('.copy-btn[data-copy]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var text = btn.getAttribute('data-copy');
+            if (text) copyText(text);
+        });
+    });
+
+    tickClock();
+    setInterval(tickClock, 1000);
 
     function finishLaunchOverlay() {
         if (!launchOverlay) return;
@@ -1185,7 +1486,7 @@
         if (!phoneScreen || phoneScreen.classList.contains('is-launched')) return;
         phoneScreen.classList.add('is-launched');
         if (launchOverlay) {
-            var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var reduced = prefersReducedMotion();
             if (reduced) {
                 finishLaunchOverlay();
             } else {
@@ -1196,7 +1497,7 @@
                 });
             }
         }
-        updateFab();
+        onScrollUi();
     }
 
     if (launchBtn && phoneScreen) {
@@ -1206,7 +1507,7 @@
         finishLaunchOverlay();
     }
 
-    updateFab();
+    onScrollUi();
 })();
 </script>
 </body>
