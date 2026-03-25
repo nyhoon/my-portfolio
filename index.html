@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>남영훈 | Android Engineer Portfolio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        :root {
+            --point-color: #3182f6;
+            --m3-primary: var(--point-color);
+            --m3-primary-container: #d3e4ff;
+            --m3-on-primary-container: #001c38;
+            --m3-surface: #f8faff;
+            --m3-surface-variant: #e1e2ec;
+            --m3-on-surface: #1b1b1f;
+            --m3-on-surface-variant: #4e5968;
+            --m3-outline: #74777f;
+            --m3-card: #ffffff;
+            --point-light: #e8f3ff;
+            --border-color: #e9ecef;
+            --active-color: #ff9800;
+            --danger-color: #f44336;
+            --phone-bezel: #1b1b1f;
+            --shadow-layered: 0 2px 4px rgba(0, 0, 0, 0.02), 0 8px 16px rgba(0, 0, 0, 0.04), 10px 10px 30px rgba(0, 0, 0, 0.08);
+            --bottom-nav-height: 56px;
+            --top-chrome-height: 43px;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #e0e2ec;
+            color: var(--m3-on-surface);
+            margin: 0;
+            line-height: 1.6;
+            word-break: keep-all;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 900px;
+            background: var(--phone-bezel);
+            padding: 12px;
+            border-radius: 56px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border: 4px solid #303030;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 10;
+        }
+
+        /* 스크롤은 .screen-scroll — FAB는 .screen 위에 고정 */
+        .screen {
+            background-color: var(--m3-surface);
+            border-radius: 44px 44px 0 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            min-height: 0;
+            max-height: calc(90vh - 56px);
+            position: relative;
+        }
+
+        .screen-scroll {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* 홈 화면 → 앱 실행 연출 */
+        .launch-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 25;
+            border-radius: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 0;
+            padding: 0;
+            overflow: hidden;
+            pointer-events: auto;
+        }
+
+        .launch-overlay-main {
+            flex: 1 1 auto;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .launch-wallpaper {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 120% 80% at 50% 0%, rgba(255, 255, 255, 0.18) 0%, transparent 55%),
+                linear-gradient(168deg, #0d47a1 0%, #1565c0 35%, #42a5f5 70%, #90caf9 100%);
+            z-index: 0;
+        }
+
+        .launch-overlay::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 88%, rgba(255, 255, 255, 0.12) 0%, transparent 45%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .status-bar--launch {
+            position: relative;
+            z-index: 3;
+            flex-shrink: 0;
+            color: #fff;
+            background: rgba(8, 20, 48, 0.42);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .launch-app-btn {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: #fff;
+            -webkit-tap-highlight-color: transparent;
+            transform-origin: 50% 45%;
+        }
+
+        .launch-app-btn:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.9);
+            outline-offset: 6px;
+            border-radius: 20px;
+        }
+
+        .launch-app-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #3182f6 0%, #1e5fbf 100%);
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.28),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
+        }
+
+        .launch-app-btn:active .launch-app-icon {
+            transform: scale(0.94);
+        }
+
+        .launch-app-label {
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+        }
+
+        .launch-hint {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin: 0;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.88);
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+            animation: launch-hint-pulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes launch-hint-pulse {
+            0%, 100% { opacity: 0.65; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(2px); }
+        }
+
+        .is-launched .launch-overlay {
+            transform-origin: 50% 42%;
+            animation: launch-open-zoom 1.25s cubic-bezier(0.28, 0.55, 0.18, 1) forwards;
+            pointer-events: none;
+        }
+
+        @keyframes launch-open-zoom {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                filter: brightness(1);
+            }
+            55% {
+                filter: brightness(1.06);
+            }
+            100% {
+                transform: scale(3.2);
+                opacity: 0;
+                filter: brightness(1.15);
+            }
+        }
+
+        .launch-overlay.launch-overlay--done {
+            animation: none;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .launch-hint {
+                animation: none;
+                opacity: 0.9;
+            }
+
+            .is-launched .launch-overlay {
+                animation: launch-open-instant 0.2s ease-out forwards;
+            }
+
+            @keyframes launch-open-instant {
+                to {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+        }
+
+        .screen-top-chrome {
+            position: sticky;
+            top: 0;
+            z-index: 6;
+            background: var(--m3-surface);
+        }
+
+        .screen-top-chrome .status-bar {
+            position: relative;
+            top: auto;
+        }
+
+        .scroll-progress {
+            height: 3px;
+            background: rgba(27, 27, 31, 0.08);
+            overflow: hidden;
+        }
+
+        .scroll-progress__fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--point-color), #5b9cf9);
+            border-radius: 0 2px 2px 0;
+            transition: width 0.08s linear;
+        }
+
+        .bottom-nav {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            min-height: var(--bottom-nav-height);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            gap: 2px;
+            padding: 6px 6px 4px;
+            background: rgba(248, 250, 255, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-color);
+            z-index: 7;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .bottom-nav__btn {
+            flex: 1;
+            max-width: 88px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2px;
+            padding: 4px 2px;
+            border: none;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--m3-on-surface-variant);
+            font-family: inherit;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bottom-nav__btn:hover {
+            color: var(--m3-on-surface);
+            background: rgba(49, 130, 246, 0.06);
+        }
+
+        .bottom-nav__btn:focus-visible {
+            outline: 2px solid var(--point-color);
+            outline-offset: 1px;
+        }
+
+        .bottom-nav__btn.is-active {
+            color: var(--point-color);
+        }
+
+        .bottom-nav__icon {
+            font-size: 1.15rem;
+            line-height: 1.2;
+        }
+
+        .bottom-nav__label {
+            line-height: 1.15;
+            text-align: center;
+        }
+
+        .info-item--contact .info-item-contact-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .info-item-contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-link {
+            color: var(--point-color);
+            font-weight: 700;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            flex-shrink: 0;
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--m3-surface);
+            color: var(--m3-on-surface-variant);
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--point-color);
+            color: var(--point-color);
+        }
+
+        .copy-btn:focus-visible {
+            outline: 2px solid var(--point-color);
+            outline-offset: 2px;
+        }
+
+        #portfolio-top,
+        #section-about,
+        #section-experience,
+        #section-toy,
+        #section-skills {
+            scroll-margin-top: calc(var(--top-chrome-height) + 8px);
+        }
+
+        .scroll-hint-fab {
+            position: absolute;
+            right: 14px;
+            bottom: calc(14px + var(--bottom-nav-height));
+            z-index: 8;
+            width: 52px;
+            height: 52px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: var(--point-color);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(49, 130, 246, 0.35), 0 8px 24px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .scroll-hint-fab svg {
+            width: 26px;
+            height: 26px;
+            animation: scroll-hint-nudge 1.8s ease-in-out infinite;
+        }
+
+        .scroll-hint-fab:hover {
+            background: #2563eb;
+            box-shadow: 0 6px 12px rgba(49, 130, 246, 0.45), 0 8px 28px rgba(0, 0, 0, 0.14);
+        }
+
+        .scroll-hint-fab:focus-visible {
+            outline: 2px solid var(--m3-primary-container);
+            outline-offset: 2px;
+        }
+
+        .scroll-hint-fab.scroll-hint-fab--hidden {
+            opacity: 0;
+            transform: scale(0.85);
+            pointer-events: none;
+        }
+
+        @keyframes scroll-hint-nudge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .scroll-hint-fab svg {
+                animation: none;
+            }
+
+            .scroll-progress__fill {
+                transition: none;
+            }
+        }
+
+        .status-bar {
+            height: 40px;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--m3-on-surface);
+            position: sticky;
+            top: 0;
+            background: rgba(248, 250, 255, 0.88);
+            backdrop-filter: blur(10px);
+            z-index: 5;
+        }
+
+        .container {
+            padding: 20px 24px calc(88px + var(--bottom-nav-height)) 24px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        header {
+            background: var(--m3-card);
+            border-radius: 32px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            box-shadow: var(--shadow-layered);
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .name-area {
+            width: 100%;
+        }
+
+        .header-hero-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hero-tagline {
+            color: var(--point-color);
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: 0.2em;
+            font-size: clamp(1rem, 3.5vw, 1.9rem);
+            line-height: 1;
+        }
+
+        .hero-name {
+            font-size: 2.2rem;
+            margin: 0;
+            font-weight: 900;
+            color: #000;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.05em;
+            flex-wrap: wrap;
+            gap: 12px;
+            line-height: 1.2;
+        }
+
+        .exp-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--active-color);
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .status-badge {
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: var(--point-light);
+            color: var(--point-color);
+            padding: 10px 20px;
+            border-radius: 14px;
+            flex-shrink: 0;
+        }
+
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            background: #fdfdfd;
+            padding: 14px 20px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-item b {
+            color: var(--point-color);
+            margin-right: 8px;
+        }
+
+        .info-item--edu {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0 8px;
+            align-items: baseline;
+        }
+
+        .info-item--edu > b {
+            grid-column: 1;
+        }
+
+        .info-item--edu > span {
+            grid-column: 2;
+        }
+
+        .info-item--edu .info-item-sub {
+            grid-column: 2;
+            font-size: 0.85rem;
+            color: var(--m3-on-surface-variant);
+            margin-top: 4px;
+            opacity: 0.8;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            color: var(--m3-on-surface);
+        }
+
+        h2::before {
+            content: "";
+            width: 6px;
+            height: 26px;
+            background: var(--point-color);
+            margin-right: 15px;
+            border-radius: 10px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .about-card {
+            background: var(--m3-card);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .about-content {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--m3-on-surface);
+            line-height: 1.4;
+        }
+
+        .about-card:hover,
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--point-color);
+            box-shadow: 12px 12px 25px rgba(49, 130, 246, 0.12);
+        }
+
+        .about-card:active {
+            transform: translateY(-2px) scale(0.99);
+        }
+
+        .project-card:active {
+            transform: translateY(-2px) scale(0.99);
+        }
+
+        .link-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .about-icon {
+            font-size: 1.5rem;
+            background: var(--point-light);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .experience-wrapper {
+            --timeline-pad: 24px;
+            --timeline-line: 2px;
+            position: relative;
+            padding-left: var(--timeline-pad);
+            border-left: var(--timeline-line) solid var(--border-color);
+            margin-left: 8px;
+        }
+
+        .company-group {
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .company-info {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        /* 세로선 중앙에 마커 점 중심: left = -(패딩 + 선 두께의 절반), translateX(-50%)로 정확히 중심 정렬 */
+        .company-info::before {
+            content: "";
+            position: absolute;
+            left: calc(-1 * var(--timeline-pad) - (var(--timeline-line) / 2));
+            top: 0.55em;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--m3-primary);
+            border: 3px solid var(--m3-surface);
+            z-index: 1;
+            box-sizing: content-box;
+        }
+
+        .company-group.active .company-info::before {
+            background: var(--active-color);
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.4);
+        }
+
+        .company-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #000;
+        }
+
+        .company-desc {
+            color: var(--m3-primary);
+            font-weight: 700;
+            margin: 4px 0 16px 0;
+            font-size: 0.95rem;
+        }
+
+        .project-card {
+            background: var(--m3-card);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .badge.blue {
+            background: var(--point-color);
+            color: #fff;
+        }
+
+        .badge.outline {
+            background: var(--point-light);
+            color: var(--point-color);
+            border: 1px solid rgba(49, 130, 246, 0.2);
+        }
+
+        .tech-tag {
+            font-size: 0.8rem;
+            color: var(--m3-on-surface-variant);
+            background: var(--m3-surface);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-right: 4px;
+            margin-bottom: 4px;
+            display: inline-block;
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 16px;
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .link-btn:hover {
+            background: var(--point-color);
+            transform: translateY(-2px);
+        }
+
+        .skill-box {
+            background: var(--m3-card);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.04);
+            margin-bottom: 12px;
+        }
+
+        .skill-box b {
+            display: block;
+            color: var(--point-color);
+            margin-bottom: 4px;
+        }
+
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tech-tags {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tags .tech-tag {
+            margin-right: 0;
+            margin-bottom: 0;
+        }
+
+        .toy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        /* 베젤 하단: 디스플레이 밖이라 본문과 절대 겹치지 않음 */
+        .screen-bottom-bezel {
+            flex: 0 0 auto;
+            background: var(--m3-surface);
+            border-radius: 0 0 44px 44px;
+            padding: 10px 0 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-handle {
+            width: 108px;
+            height: 4px;
+            background: var(--m3-on-surface);
+            border-radius: 2px;
+            opacity: 0.22;
+        }
+
+        .highlight-red {
+            color: var(--danger-color);
+            font-weight: 700;
+        }
+
+        /* 모바일에서도 폰 껍데기 유지: 주변에 배경(#e0e2ec)이 보이도록 여백 + 라운드 베젤 */
+        @media (max-width: 600px) {
+            body {
+                padding: max(10px, env(safe-area-inset-top, 0px)) 12px max(14px, env(safe-area-inset-bottom, 0px));
+                min-height: 100dvh;
+                align-items: stretch;
+            }
+
+            .phone-frame {
+                border-radius: 36px;
+                padding: 8px;
+                border: 3px solid #303030;
+                max-width: 100%;
+                width: 100%;
+                min-height: 0;
+                /* 뷰포트 안에 고정 → 바깥은 배경만 보이고 스크롤은 .screen-scroll */
+                height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+                max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+                box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.48);
+                margin: 0 auto;
+                overflow: hidden;
+            }
+
+            .phone-notch {
+                display: block;
+                width: 96px;
+                height: 22px;
+                top: 18px;
+                border-radius: 16px;
+            }
+
+            .screen {
+                border-radius: 30px 30px 0 0;
+                max-height: none;
+                flex: 1 1 auto;
+                min-height: 0;
+            }
+
+            .screen-bottom-bezel {
+                border-radius: 0 0 30px 30px;
+            }
+
+            .experience-wrapper {
+                --timeline-pad: 20px;
+                margin-left: 5px;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            header {
+                padding: 28px 24px;
+                margin-bottom: 40px;
+                border-radius: 28px;
+            }
+
+            .header-hero-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .status-badge {
+                max-width: 100%;
+            }
+
+            /* 좁은 폭에서 minmax(300px) 열이 뷰보다 커져 이메일/학력 등이 가로로 잘림 → 1열 + 줄바꿈 */
+            .personal-info {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .info-item,
+            .info-item--edu {
+                min-width: 0;
+            }
+
+            .info-item,
+            .info-item--edu span {
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+
+            /* 노치·상단 라운드와 겹치지 않도록 스테이터스 영역 확보 */
+            .status-bar {
+                min-height: 44px;
+                padding-top: 10px;
+                padding-bottom: 6px;
+            }
+
+            :root {
+                --top-chrome-height: 50px;
+            }
+        }
+
+        .screen-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .screen-scroll::-webkit-scrollbar-thumb {
+            background: var(--m3-outline);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-frame">
+    <div class="phone-notch"></div>
+    <div class="screen" id="phoneScreen">
+        <div class="launch-overlay" id="launchOverlay" role="dialog" aria-modal="true" aria-labelledby="launchAppLabel">
+            <div class="launch-wallpaper" aria-hidden="true"></div>
+            <div class="status-bar status-bar--launch">
+                <span class="js-status-clock" aria-hidden="true">00:00</span>
+                <div style="display: flex; gap: 8px;">
+                    <span>📶</span>
+                    <span>🔋 92%</span>
+                </div>
+            </div>
+            <div class="launch-overlay-main">
+                <button type="button" class="launch-app-btn" id="launchAppBtn" aria-labelledby="launchAppLabel">
+                    <span class="launch-app-icon" aria-hidden="true">📱</span>
+                    <span class="launch-app-label" id="launchAppLabel">Portfolio</span>
+                </button>
+                <p class="launch-hint">탭하여 열기</p>
+            </div>
+        </div>
+        <div class="screen-scroll" id="screenScroll">
+        <div class="screen-top-chrome">
+            <div class="status-bar">
+                <span class="js-status-clock">00:00</span>
+                <div style="display: flex; gap: 8px;">
+                    <span aria-hidden="true">📶</span>
+                    <span aria-hidden="true">🔋 92%</span>
+                </div>
+            </div>
+            <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="페이지 스크롤 진행">
+                <div class="scroll-progress__fill" id="scrollProgressFill"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <header id="portfolio-top">
+                <div class="header-top">
+                    <div class="name-area">
+                        <div class="header-hero-row">
+                            <p class="hero-tagline">ANDROID ENGINEER</p>
+                            <div class="status-badge">🎂 1992.02.20 / 💍 기혼 / 💂 의무경찰 만기제대</div>
+                        </div>
+                        <h1 class="hero-name">남영훈 <span class="exp-badge">7&nbsp;년차</span></h1>
+                    </div>
+                </div>
+                <div class="personal-info">
+                    <div class="info-item info-item--contact">
+                        <div class="info-item-contact-row">
+                            <b>✉️ E-Mail</b>
+                            <div class="info-item-contact-actions">
+                                <a class="contact-link" href="mailto:feelsogxxd@naver.com">feelsogxxd@naver.com</a>
+                                <button type="button" class="copy-btn" data-copy="feelsogxxd@naver.com" aria-label="이메일 주소 복사">복사</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-item info-item--contact">
+                        <div class="info-item-contact-row">
+                            <b>📞 Phone</b>
+                            <div class="info-item-contact-actions">
+                                <a class="contact-link" href="tel:+821071927102">010-7192-7102</a>
+                                <button type="button" class="copy-btn" data-copy="010-7192-7102" aria-label="전화번호 복사">복사</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-item info-item--edu">
+                        <b>🏫 High</b>
+                        <span>흥진고등학교 졸업</span>
+                        <div class="info-item-sub">2007.03 - 2010.01 졸업</div>
+                    </div>
+                    <div class="info-item info-item--edu">
+                        <b>🎓 Univ</b>
+                        <span>국립한국교통대 소프트웨어학 학사</span>
+                        <div class="info-item-sub">2012.03 - 2019.02 졸업</div>
+                    </div>
+                </div>
+            </header>
+
+            <section id="section-about">
+                <h2>🙋 ♂️ About me</h2>
+                <div class="about-grid">
+                    <div class="about-card"><div class="about-icon">🚀</div><div class="about-content">앱 설계부터 스토어 릴리즈, 운영 관리까지 서비스 전 사이클 경험</div></div>
+                    <div class="about-card"><div class="about-icon">📈</div><div class="about-content">누적 10만 다운로드 이상의 대규모 서비스 운영 및 유지보수 능력</div></div>
+                    <div class="about-card"><div class="about-icon">🏢</div><div class="about-content">20인 규모 이상의 복합적인 대규모 협업 프로젝트 완수</div></div>
+                    <div class="about-card"><div class="about-icon">🔍</div><div class="about-content">팀의 동반 성장을 이끄는 유연하고 생산적인 코드 리뷰 지향</div></div>
+                    <div class="about-card"><div class="about-icon">🤝</div><div class="about-content">능동적인 의견 조율로 프로젝트의 방향성을 잡는 커뮤니케이터</div></div>
+                </div>
+            </section>
+
+            <section id="section-experience">
+                <h2>💼 Experience</h2>
+                <div class="experience-wrapper">
+                    <div class="company-group active">
+                        <div class="company-info">
+                            <span class="company-name">회사명 : NHN</span>
+                            <div class="company-desc">클라우드와 게임, 올인원 협업툴 Dooray!</div>
+                            <div style="font-size: 0.85rem; color: var(--m3-outline); margin-bottom: 16px;">
+                                근무 기간 : 2025.06.12 ~ 2026.06.16 (연장요청으로 6월 예정)<br>
+                                근무 부서 : Dooray! 팀 / 직급 : 선임연구원(프리랜서)<br>
+                                퇴사 사유 : 프로젝트 계약 기간 만료 및 수행 완료 예정
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : NHN Dooray! 그룹웨어 앱 고도화
+                                <div class="badge-group"><span class="badge outline">10~20인 협업</span><span class="badge outline">리팩토링</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 20%</span></div>
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2025.06 ~ 2026.06 (연장요청으로 6월 예정)</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>메일/첨부파일/드라이브 모듈의 MVI 패턴 기반 신규개발을 맡았습니다.</strong> Clean Architecture를 적용하여 뷰와 프레젠터 도메인을 분리함으로써 유지보수 효율을 높였으며, 단일화 규칙을 지키며 코드작성을 하였고 메모리릭 관리를 하였습니다.</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">KOTLIN</span><span class="tech-tag">MVI</span><span class="tech-tag">JUNIT</span><span class="tech-tag">KMP</span><span class="tech-tag">CLEAN ARCHITECTURE</span><span class="tech-tag">CI/CD</span>
+                            </div>
+                            <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.dooray.all" class="link-btn" target="_blank">Google Play ↗</a></div>
+                        </div>
+                    </div>
+
+                    <div class="company-group">
+                        <div class="company-info">
+                            <span class="company-name">회사명 : KT DS</span>
+                            <div class="company-desc">KT 그룹의 IT 솔루션 구축회사</div>
+                            <div style="font-size: 0.85rem; color: var(--m3-outline); margin-bottom: 16px;">
+                                근무 기간 : 2024.07.19 ~ 2025.05.28<br>
+                                근무 부서 : KT안심박스팀 / 직급 : 과장(프리랜서)<br>
+                                퇴사 사유 : 프로젝트 계약 기간 만료
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : KT 안심박스 앱 운영 및 QA 추가개발
+                                <div class="badge-group"><span class="badge outline">추가 개발 및 운영</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 30%</span></div>
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2024.07 ~ 2025.05</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>안드로이드 접근성 서비스(Accessibility)를 활용한 실시간 단말 제어 로직을 구현</strong>했습니다. BLE 및 위치 기반 API를 최적화하여 백그라운드 구동 안정성을 확보했으며, 대규모 사용자 VOC 분석을 통해 단말 파편화 이슈를 90% 이상 해결하며 서비스 안정성을 높이고 유저이탈을 막았습니다.</p>
+                            <div class="tech-tags">
+                                <span class="tech-tag">KOTLIN</span><span class="tech-tag">MVVM</span><span class="tech-tag">BLE</span><span class="tech-tag">WI-FI</span><span class="tech-tag">GPS</span>
+                            </div>
+                            <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.kt.familysafeandroid" class="link-btn" target="_blank">Google Play ↗</a></div>
+                        </div>
+                    </div>
+
+                    <div class="company-group">
+                        <div class="company-info">
+                            <span class="company-name">회사명 : 뷰라운드</span>
+                            <div class="company-desc">취미와 만남을 연결해주는 골프 매칭 플랫폼</div>
+                            <div style="font-size: 0.85rem; color: var(--m3-outline); margin-bottom: 16px;">
+                                근무 기간 : 2023.10.10 ~ 2024.05.13<br>
+                                근무 부서 : 개발팀 / 직급 : 대리(정규직)<br>
+                                퇴사 사유 : <span class="highlight-red">회사의 폐업으로 인한 권고사직</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 골라 (Golla) 앱 신규 개발<div class="badge-group"><span class="badge outline">신규 개발</span><span class="badge blue">기여도 80%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2023.12 ~ 2024.03</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>Flutter를 이용한 골프 조인 매칭 플랫폼의 설계 및 개발 전 과정을 전담</strong>했습니다. 회사에 상황에 맞춰 FLUUTER 를 공부하며 도입하여 AOS/iOS 동시 대응 환경을 구축하여 개발 기간을 단축하였으나 회사 사정으로 완성되지 못한 개발입니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">FLUTTER</span><span class="tech-tag">DART</span><span class="tech-tag">MVVM</span></div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 골프 인도어 키오스크 앱<div class="badge-group"><span class="badge outline">리뉴얼 및 운영</span><span class="badge blue">기여도 30%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2023.10 ~ 2024.03</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>TCP/IP 기반 소켓 통신 및 하드웨어 제어 안정성을 개선</strong>했습니다. 태블릿용 앱과 ExoPlayer를 커스텀하여 인도어 연습장 환경에 최적화된 저지연 미디어 재생 시스템을 구축했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">TCP/IP</span><span class="tech-tag">EXOPLAYER</span></div>
+                        </div>
+                    </div>
+
+                    <div class="company-group">
+                        <div class="company-info">
+                            <span class="company-name">회사명 : 일동제약 후다닥</span>
+                            <div class="company-desc">비대면 진료와 건강 관리로 영역을 확장하는 헬스케어회사</div>
+                            <div style="font-size: 0.85rem; color: var(--m3-outline); margin-bottom: 16px;">
+                                근무 기간 : 2022.07.11 ~ 2023.07.11<br>
+                                근무 부서 : 개발실 / 직급 : 대리(정규직)<br>
+                                퇴사 사유 : <span class="highlight-red">회사의 폐업으로 인한 권고사직</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 후다닥 케어 (비대면 진료) 앱 운영 및 개발<div class="badge-group"><span class="badge outline">신규 개발 및 운영</span><span class="badge blue">기여도 80%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2022.09 ~ 2023.07</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>비대면 진료부터 처방전 팩스전송, 약 배달까지 올인원 네이티브 앱을 구축</strong>했습니다. 실시간 영상 진료 API 연동부터 복잡한 결제/처방전 프로세스를 아키텍처 중심으로 설계했습니다. 특히 <strong>FCM을 통한 맞춤형 푸시 알림과 특정 진료 예약/결제 화면으로 연결되는 랜딩 페이지 로직을 구현</strong>하여 서비스 접근성을 높였으며, GA로 기종별 오류를 분석해 안정성을 확보했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">KOTLIN</span><span class="tech-tag">FCM</span><span class="tech-tag">DEEP LINK</span><span class="tech-tag">HILT</span><span class="tech-tag">GOOGLE ANALYTICS</span></div>
+                            <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.whodadoc.td" class="link-btn" target="_blank">Google Play ↗</a></div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 후다닥 건강 운영 및 개발<div class="badge-group"><span class="badge outline">리뉴얼 및 운영</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 80%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2022.07 ~ 2023.07</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>레거시 Java 코드베이스를 Kotlin으로 전환</strong>했습니다. 하이브리드 앱 환경에서 JavaScript Interface 최적화를 통해 웹-네이티브 간 통신 성능을 개선했습니다. <strong>Firebase 푸시 시스템을 고도화하여 최신 건강 콘텐츠 및 이벤트로 자동 랜딩되는 구조를 설계</strong>했으며, GA 연동으로 기종별 크래시 로그를 실시간 모니터링하여 대응했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">KOTLIN</span><span class="tech-tag">FCM</span><span class="tech-tag">DEEP LINK</span><span class="tech-tag">GOOGLE ANALYTICS</span></div>
+                            <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.idop.whodadoc.mc" class="link-btn" target="_blank">Google Play ↗</a></div>
+                        </div>
+                    </div>
+
+                    <div class="company-group">
+                        <div class="company-info">
+                            <span class="company-name">회사명 : 오비이랩</span>
+                            <div class="company-desc">뇌 영상 기술로 의료 진단 메디컬 테크 스타트업</div>
+                            <div style="font-size: 0.85rem; color: var(--m3-outline); margin-bottom: 16px;">
+                                근무 기간 : 2022.02.07 ~ 2022.07.08<br>
+                                근무 부서 : SW팀 / 직급 : 사원(정규직)<br>
+                                퇴사 사유 : 커리어 확장을 위한 이직
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : PBM (정부과제) - 우울증 분석 정보 제공 앱<div class="badge-group"><span class="badge outline">신규 개발</span><span class="badge blue">기여도 70%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2022.05 ~ 2022.07</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>BLE 실시간 통신을 통한 뇌 활성도 측정 앱을 신규 개발</strong>했습니다. NDK를 통해 전송되는 대용량 데이터를 받아 차트화 하는 기능을 구현했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">KOTLIN</span><span class="tech-tag">MVVM</span><span class="tech-tag">BLE</span><span class="tech-tag">NDK</span></div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 웅진 KIDS - 영유아 뇌 발달 활성도 측정 및 시각화 앱<div class="badge-group"><span class="badge outline">추가 개발 및 운영</span><span class="badge blue">기여도 20%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2022.02 ~ 2022.05</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>NIRS(근적외선 분광분석기)를 활용한 영유아 전용 뇌 활성도 측정 인터페이스를 개발</strong>했습니다. 측정된 데이터를 부모나 전문가가 이해하기 쉬운 놀이와 그래프와 캐릭터 애니메이션으로 실시간 렌더링하는 기능을 구현했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">KOTLIN</span><span class="tech-tag">MVVM</span><span class="tech-tag">BLE</span><span class="tech-tag">NDK</span></div>
+                        </div>
+                    </div>
+
+                    <div class="company-group">
+                        <div class="company-info">
+                            <span class="company-name">회사명 : 유니메오</span>
+                            <div class="company-desc">간병 서비스의 질을 높이고 시니어 돌봄 생태계를 주도하는 회사</div>
+                            <div style="font-size: 0.85rem; color: var(--m3-outline); margin-bottom: 16px;">
+                                근무 기간 : 2020.07.13 ~ 2021.12.08<br>
+                                근무 부서 : 기술사업팀 / 직급 : 사원(정규직)<br>
+                                퇴사 사유 : 직업의 방향성에 대한 고민으로 퇴사
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 좋은케어 (상담 & 간병 매칭 앱)<div class="badge-group"><span class="badge outline">리팩토링 및 추가개발 / 운영</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 80%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2020.08 ~ 2021.12</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>통합 케어 서비스를 위한 환자-간병인 매칭 및 상담 시스템을 구축</strong>했습니다. WebRTC 기반의 1:1 비대면 영상 상담 기능을 개발하고, Naver Map API를 활용한 위치 기반 매칭 시스템을 구현했습니다. 특히 <strong>FCM을 활용한 앱 푸시 시스템을 구축하여, 알림 클릭 시 특정 콘텐츠나 상담 화면으로 즉시 연결되는 랜딩 페이지 이동 로직을 구현</strong>했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">WEBRTC</span><span class="tech-tag">FCM</span><span class="tech-tag">DEEP LINK</span><span class="tech-tag">NAVER API</span><span class="tech-tag">AAC</span><span class="tech-tag">GOOGLE ANALYTICS</span></div>
+                            <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.unimewo.careclient" class="link-btn" target="_blank">Google Play ↗</a></div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 좋은간병인 일자리 찾기 (간병사 전용)<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발 / 운영</span><span class="badge blue">기여도 70%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2020.08 ~ 2021.12</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>간병사들이 실시간으로 일자리 공고를 확인하고 지원할 수 있는 전용 애플리케이션을 개발</strong>했습니다. <strong>Firebase 푸시 알림을 통해 맞춤형 일자리 정보를 실시간으로 제공하고, 앱 내 상세 공고 페이지로의 자동 랜딩 구조를 설계</strong>하여 지원율을 높였습니다. AAC를 적용하여 데이터 일관성을 유지하고 안정적인 UI 환경을 구현했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">AAC</span><span class="tech-tag">FCM</span><span class="tech-tag">FIREBASE</span><span class="tech-tag">GOOGLE ANALYTICS</span></div>
+                            <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.unimewo.careemployee" class="link-btn" target="_blank">Google Play ↗</a></div>
+                        </div>
+                    </div>
+
+                    <div class="company-group">
+                        <div class="company-info">
+                            <span class="company-name">회사명 : 2DM</span>
+                            <div class="company-desc">하드웨어와 소프트웨어를 융합해 무인 자동화와 QR스마트 오더</div>
+                            <div style="font-size: 0.85rem; color: var(--m3-outline); margin-bottom: 16px;">
+                                근무 기간 : 2019.12.11 ~ 2020.06.29<br>
+                                근무 부서 : 개발팀 / 직급 : 사원(정규직)<br>
+                                퇴사 사유 : <span class="highlight-red">회사의 폐업으로 인한 권고사직</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 고기자판기 애플리케이션<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발</span><span class="badge blue">기여도 60%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2019.12 ~ 2020.02</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>Serial Port 통신을 이용한 고기 자판기 하드웨어 제어 시스템을 고도화</strong>했습니다. 사용자가 선택한 상품이 정확히 토출되도록 통신 로직을 안정화했으며, Firebase를 연동하여 실시간 재고 상태 및 장비 현황을 관리할 수 있는 환경을 구축했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">SERIAL COMMUNICATION</span><span class="tech-tag">FIREBASE</span></div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 스마트오더 애플리케이션 (QR 결제 및 선 주문)<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발 / 운영</span><span class="badge blue">기여도 40%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2020.01 ~ 2020.03</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>QR 코드 인식 기반의 결제 시스템과 픽업 선 주문 로직을 개발</strong>했습니다. 오프라인 매장의 효율적인 주문 처리를 위해 Firebase Realtime Database를 활용한 주문 접수 및 알림 시스템을 구현하여 비대면 주문 환경을 최적화했습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">QR CODE</span><span class="tech-tag">FIREBASE</span></div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">프로젝트 : 푸드 키오스크 (S방송사 XX식당 - 대전 청년구단)<div class="badge-group"><span class="badge outline">리뉴얼 및 리팩토링</span><span class="badge blue">기여도 40%</span></div></div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2020.03 ~ 2020.06</div>
+                            <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>방송 협찬용 커스터마이징 키오스크의 UI 리뉴얼 및 앱 리팩토링을</strong>했습니다. 다국어 지원을 위한 UI 확장 구조를 설계하고, 주문 시스템의 로직을 정리하여 유지보수성을 높였습니다.</p>
+                            <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">FIREBASE</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-toy">
+                <h2>💻 Toy Projects</h2>
+                <div class="toy-grid">
+                    <div class="project-card">
+                        <div class="project-title">주식 자동매매 앱 <span class="badge outline">Fin-Tech</span></div>
+                        <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">한국투자증권 Open API 연동</div>
+                        <p style="font-size: 0.85rem;">AI 추천 종목을 추적하고 24시간 백그라운드로 시장을 감시하는 개인 비서 안드로이드 앱</p>
+                        <div class="tech-tags"><span class="tech-tag">PYTHON</span><span class="tech-tag">KOTLIN</span></div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">바람의나라 클래식 매크로 <span class="badge outline">Automation</span></div>
+                        <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">OpenCV / OCR 인식 활용</div>
+                        <p style="font-size: 0.85rem;">반복적인 퀘스트와 스킬 사용을 자동화하며 효율을 높인 비영리 개인 프로젝트</p>
+                        <div class="tech-tags"><span class="tech-tag">PYTHON</span><span class="tech-tag">OPENCV</span><span class="tech-tag">OCR</span></div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">장학재단 웹 구축 <span class="badge outline">Web</span></div>
+                        <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">PHP / Cafe24 호스팅</div>
+                        <p style="font-size: 0.85rem;">재단 정보를 효과적으로 전달하고 관리할 수 있는 공식 웹사이트를 제작</p>
+                        <div class="tech-tags"><span class="tech-tag">PHP</span><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">MYSQL</span></div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">코인 자동매매 프로그램<span class="badge outline">Fin-Tech</span></div>
+                        <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">TradingView / Bybit / Google Cloud / Telegram Bot API 연동</div>
+                        <p style="font-size: 0.85rem;">실시간으로 코인을 분석하여 웹훅을 통해 자동매매 및 봇 자동 알림, 텔레그램으로 서버와 봇 및 제어 프로그램</p>
+                        <div class="tech-tags"><span class="tech-tag">PYTHON</span><span class="tech-tag">WEBHOOK</span><span class="tech-tag">TELEGRAM BOT</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-skills">
+                <h2>🎒 Skills & Tools</h2>
+                <div class="skills-container">
+                    <div class="skill-box"><b>Languages</b>Kotlin, Java, Python, Dart, PHP</div>
+                    <div class="skill-box"><b>Architecture</b>MVI, MVVM, Clean, Multi-Module</div>
+                    <div class="skill-box"><b>Tech Stack</b>Compose, Jetpack, Hilt, Coroutine, BLE, WebRTC</div>
+                    <div class="skill-box"><b>Tools</b>Git, Android Studio, Figma, Postman</div>
+                </div>
+            </section>
+
+            <footer style="text-align: center; padding: 40px 0; color: var(--m3-outline); font-size: 0.8rem;">
+                © 2026 Nam Young-hoon. Android Engineer Portfolio.
+            </footer>
+        </div>
+        </div>
+        <nav class="bottom-nav" id="bottomNav" aria-label="섹션 이동">
+            <button type="button" class="bottom-nav__btn is-active" data-section="portfolio-top" aria-current="page">
+                <span class="bottom-nav__icon" aria-hidden="true">🏠</span>
+                <span class="bottom-nav__label">홈</span>
+            </button>
+            <button type="button" class="bottom-nav__btn" data-section="section-about">
+                <span class="bottom-nav__icon" aria-hidden="true">👤</span>
+                <span class="bottom-nav__label">About</span>
+            </button>
+            <button type="button" class="bottom-nav__btn" data-section="section-experience">
+                <span class="bottom-nav__icon" aria-hidden="true">💼</span>
+                <span class="bottom-nav__label">경력</span>
+            </button>
+            <button type="button" class="bottom-nav__btn" data-section="section-toy">
+                <span class="bottom-nav__icon" aria-hidden="true">🧩</span>
+                <span class="bottom-nav__label">Toy</span>
+            </button>
+            <button type="button" class="bottom-nav__btn" data-section="section-skills">
+                <span class="bottom-nav__icon" aria-hidden="true">🛠</span>
+                <span class="bottom-nav__label">스킬</span>
+            </button>
+        </nav>
+        <button type="button" class="scroll-hint-fab" id="scrollHintFab" aria-label="아래로 더 보기" title="스크롤">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="screen-bottom-bezel" aria-hidden="true">
+        <div class="nav-handle"></div>
+    </div>
+</div>
+
+<script>
+(function () {
+    var scrollEl = document.getElementById('screenScroll') || document.querySelector('.screen-scroll');
+    var fab = document.getElementById('scrollHintFab');
+    var phoneScreen = document.getElementById('phoneScreen');
+    var launchOverlay = document.getElementById('launchOverlay');
+    var launchBtn = document.getElementById('launchAppBtn');
+    var bottomNav = document.getElementById('bottomNav');
+    var progressFill = document.getElementById('scrollProgressFill');
+    var progressEl = document.getElementById('scrollProgress');
+    var sectionOrder = ['portfolio-top', 'section-about', 'section-experience', 'section-toy', 'section-skills'];
+
+    function prefersReducedMotion() {
+        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function tickClock() {
+        var label = new Date().toLocaleTimeString('ko-KR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+        document.querySelectorAll('.js-status-clock').forEach(function (node) {
+            node.textContent = label;
+        });
+    }
+
+    function updateProgress() {
+        if (!scrollEl || !progressFill || !progressEl) return;
+        var max = scrollEl.scrollHeight - scrollEl.clientHeight;
+        var pct = max <= 0 ? 0 : Math.round((scrollEl.scrollTop / max) * 100);
+        progressFill.style.width = pct + '%';
+        progressEl.setAttribute('aria-valuenow', String(pct));
+    }
+
+    function updateNavActive() {
+        if (!scrollEl || !bottomNav) return;
+        var pad = 56;
+        var st = scrollEl.scrollTop;
+        var activeId = sectionOrder[0];
+        for (var i = 0; i < sectionOrder.length; i++) {
+            var el = document.getElementById(sectionOrder[i]);
+            if (!el) continue;
+            var top = el.getBoundingClientRect().top - scrollEl.getBoundingClientRect().top + scrollEl.scrollTop;
+            if (top <= st + pad) {
+                activeId = sectionOrder[i];
+            }
+        }
+        bottomNav.querySelectorAll('.bottom-nav__btn').forEach(function (btn) {
+            var sec = btn.getAttribute('data-section');
+            var on = sec === activeId;
+            btn.classList.toggle('is-active', on);
+            if (on) {
+                btn.setAttribute('aria-current', 'page');
+            } else {
+                btn.removeAttribute('aria-current');
+            }
+        });
+    }
+
+    function scrollToSection(sectionId) {
+        var el = document.getElementById(sectionId);
+        if (!el) return;
+        var smooth = !prefersReducedMotion();
+        el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    }
+
+    function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text);
+            return;
+        }
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+        } catch (e) { /* ignore */ }
+        document.body.removeChild(ta);
+    }
+
+    function onScrollUi() {
+        updateFab();
+        updateProgress();
+        updateNavActive();
+    }
+
+    function updateFab() {
+        if (!scrollEl || !fab) return;
+        var threshold = 32;
+        var atBottom = scrollEl.scrollHeight - scrollEl.scrollTop - scrollEl.clientHeight <= threshold;
+        var noOverflow = scrollEl.scrollHeight <= scrollEl.clientHeight + 1;
+        fab.classList.toggle('scroll-hint-fab--hidden', atBottom || noOverflow);
+    }
+
+    if (scrollEl && fab) {
+        scrollEl.addEventListener('scroll', onScrollUi, { passive: true });
+        window.addEventListener('resize', onScrollUi);
+        fab.addEventListener('click', function () {
+            var step = Math.min(scrollEl.clientHeight * 0.85, scrollEl.scrollHeight - scrollEl.scrollTop - scrollEl.clientHeight);
+            if (step < 8) return;
+            scrollEl.scrollBy({ top: step, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+        });
+    }
+
+    if (bottomNav) {
+        bottomNav.querySelectorAll('.bottom-nav__btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var id = btn.getAttribute('data-section');
+                if (id) scrollToSection(id);
+            });
+        });
+    }
+
+    document.querySelectorAll('.copy-btn[data-copy]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var text = btn.getAttribute('data-copy');
+            if (text) copyText(text);
+        });
+    });
+
+    tickClock();
+    setInterval(tickClock, 1000);
+
+    function finishLaunchOverlay() {
+        if (!launchOverlay) return;
+        launchOverlay.classList.add('launch-overlay--done');
+        launchOverlay.setAttribute('aria-hidden', 'true');
+        launchOverlay.removeAttribute('role');
+        launchOverlay.removeAttribute('aria-modal');
+    }
+
+    function runLaunch() {
+        if (!phoneScreen || phoneScreen.classList.contains('is-launched')) return;
+        phoneScreen.classList.add('is-launched');
+        if (launchOverlay) {
+            var reduced = prefersReducedMotion();
+            if (reduced) {
+                finishLaunchOverlay();
+            } else {
+                launchOverlay.addEventListener('animationend', function onLaunchAnimEnd(ev) {
+                    if (ev.target !== launchOverlay) return;
+                    launchOverlay.removeEventListener('animationend', onLaunchAnimEnd);
+                    finishLaunchOverlay();
+                });
+            }
+        }
+        onScrollUi();
+    }
+
+    if (launchBtn && phoneScreen) {
+        launchBtn.addEventListener('click', runLaunch);
+    } else if (phoneScreen) {
+        phoneScreen.classList.add('is-launched');
+        finishLaunchOverlay();
+    }
+
+    onScrollUi();
+})();
+</script>
+</body>
+</html>
