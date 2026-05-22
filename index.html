@@ -825,6 +825,45 @@
             gap: 20px;
         }
 
+        .toy-card--featured {
+            grid-column: 1 / -1;
+        }
+
+        .toy-role-list {
+            margin: 12px 0 0;
+            padding-left: 1.1rem;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            color: var(--m3-on-surface);
+        }
+
+        .toy-role-list li {
+            margin-bottom: 6px;
+        }
+
+        .toy-role-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .toy-role-list strong {
+            color: var(--point-color);
+        }
+
+        .toy-ai-note {
+            margin: 10px 0 0;
+            padding: 10px 12px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--m3-on-surface-variant);
+            background: var(--m3-surface);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .toy-ai-note strong {
+            color: var(--point-color);
+        }
+
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1246,6 +1285,41 @@
                 <section id="section-toy">
                     <h2>💻 Toy Projects</h2>
                     <div class="toy-grid">
+                        <div class="project-card toy-card--featured">
+                            <div class="project-title">PocoPet — 오버레이 힐링 비서 펫
+                                <div class="badge-group">
+                                    <span class="badge blue">1인 기획·개발·운영</span>
+                                    <span class="badge outline">AI 대화</span>
+                                    <span class="badge outline">GEMINI API</span>
+                                </div>
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">2026.06~ 운영</div>
+                            <p style="font-size: 0.9rem; line-height: 1.55; margin: 0;">
+                                화면 위에 떠 있는 <strong>오버레이 펫</strong>과 AI대화·돌봄(밥·놀이 등)을 하는 Android 앱입니다.
+                                채팅으로 <strong>날씨·잡담·앱/설정 열기·예약 알림</strong>까지 받을 수 있습니다.
+                                서비스 기획·Kotlin 네이티브 구현·Play Store 운영을 <strong>1인</strong>이 맡았습니다.
+                            </p>
+                        
+                            <ul class="toy-role-list">
+                                <li><strong>1인 기획 개발 운영</strong> — 제품·대화·권한 정책, 네이티브 구현, 스토어·개인정보·배포</li>
+                                <li><strong>AI 활용</strong> — Gemini 펫 톤 대화·프롬프트 설계, 날씨·걸음 등은 로컬 우선·나머지는 AI·폴백 라우팅</li>
+                                <li><strong>AI·기기 제어</strong> — 말로 앱·설정 실행·시각 예약 알림, 애매한 말은 LLM 의도 해석 후 기기 액션으로 연결</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">KOTLIN</span>
+                                <span class="tech-tag">COMPOSE</span>
+                                <span class="tech-tag">MVI</span>
+                                <span class="tech-tag">HILT</span>
+                                <span class="tech-tag">ROOM</span>
+                                <span class="tech-tag">SUPABASE</span>
+                                <span class="tech-tag">GEMINI API</span>
+                                <span class="tech-tag">RETROFIT</span>
+                                <span class="tech-tag">PLAY BILLING</span>
+                            </div>
+                            <div class="btn-wrapper">
+                                <a href="https://play.google.com/store/apps/details?id=com.pocopet" class="link-btn" target="_blank" rel="noopener noreferrer">Google Play ↗</a>
+                            </div>
+                        </div>
                         <div class="project-card">
                             <div class="project-title">주식 자동매매 앱 <span class="badge outline">Fin-Tech</span></div>
                             <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">한국투자증권 Open API 연동</div>
