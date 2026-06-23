@@ -1,4 +1,3 @@
-
 .screen-top-chrome {
     position: sticky;
     top: 0;
@@ -89,52 +88,15 @@
     text-align: center;
 }
 
-.info-item--contact .info-item-contact-row {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-}
-
-.info-item-contact-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-}
-
 .contact-link {
     color: var(--point-color);
     font-weight: 700;
     text-decoration: none;
-    word-break: break-all;
+    overflow-wrap: anywhere;
 }
 
 .contact-link:hover {
     text-decoration: underline;
-}
-
-.copy-btn {
-    flex-shrink: 0;
-    padding: 6px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    background: var(--m3-surface);
-    color: var(--m3-on-surface-variant);
-    font-family: inherit;
-    font-size: 0.75rem;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.copy-btn:hover {
-    border-color: var(--point-color);
-    color: var(--point-color);
-}
-
-.copy-btn:focus-visible {
-    outline: 2px solid var(--point-color);
-    outline-offset: 2px;
 }
 
 #portfolio-top,
