@@ -223,6 +223,22 @@ h2::before {
     flex-shrink: 0;
 }
 
+.about-card--featured {
+    grid-column: 1 / -1;
+    align-items: center;
+    background: var(--m3-card);
+    border: 2px solid var(--point-color);
+    box-shadow: 6px 6px 20px rgba(49, 130, 246, 0.14);
+}
+
+.about-card--featured .about-icon {
+    background: var(--point-light);
+}
+
+.about-card--featured .about-content {
+    font-size: 1rem;
+}
+
 .experience-wrapper {
     --timeline-pad: 24px;
     --timeline-line: 2px;
