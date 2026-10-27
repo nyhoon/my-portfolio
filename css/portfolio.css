@@ -1,0 +1,787 @@
+:root {
+    --paper:#f6f5f1;
+    --ink:#202522;
+    --muted:#5b635e;
+    --line:#d8dcd5;
+    --accent:#235e48;
+    --soft:#e7ece4;
+    --card:#fff;
+    --m3-outline:var(--muted);
+    --m3-on-surface-variant:var(--muted);
+    --m3-primary:var(--accent);
+    --space:clamp(24px,5vw,72px);
+}
+* {
+    box-sizing:border-box;
+}
+html {
+    scroll-behavior:smooth;
+    scroll-padding-top:104px;
+}
+body {
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.65;
+    word-break:keep-all;
+    overflow-wrap:break-word;
+}
+a {
+    color:inherit;
+    text-underline-offset:5px;
+}
+button,a {
+    -webkit-tap-highlight-color:transparent;
+}
+a:focus-visible {
+    outline:3px solid var(--accent);
+    outline-offset:5px;
+    border-radius:3px;
+}
+img {
+    max-width:100%;
+    height:auto;
+    display:block;
+}
+::selection {
+    background:#c7dbc6;
+    color:#132b20;
+}
+.site-shell {
+    max-width:1360px;
+    margin:auto;
+    padding:0 var(--space);
+}
+.skip-link {
+    position:fixed;
+    top:8px;
+    left:8px;
+    background:var(--ink);
+    color:white;
+    padding:12px;
+    z-index:20;
+    transform:translateY(-150%);
+}
+.skip-link:focus {
+    transform:none;
+}
+.site-nav {
+    position:sticky;
+    top:0;
+    z-index:10;
+    display:flex;
+    align-items:center;
+    gap:28px;
+    min-height:88px;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+}
+.wordmark {
+    font-weight:850;
+    font-size:26px;
+    letter-spacing:-1.5px;
+    text-decoration:none;
+}
+.wordmark span {
+    color:var(--accent);
+}
+.nav-links {
+    display:flex;
+    gap:26px;
+    margin-left:auto;
+}
+.site-nav a {
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+    font-size:14px;
+    font-weight:650;
+    text-decoration:none;
+}
+.site-nav .wordmark {
+    font-size:26px;
+}
+.nav-links a {
+    color:var(--muted);
+}
+.nav-links a:hover,.nav-links a[aria-current] {
+    color:var(--accent);
+}
+.nav-contact {
+    border-left:1px solid var(--line);
+    padding-left:26px;
+    gap:14px;
+}
+.container {
+    padding:0;
+}
+header {
+    padding:74px 0 64px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:80px;
+}
+.header-top,.name-area {
+    width:100%;
+}
+.header-hero-row {
+    display:flex;
+    align-items:center;
+    gap:20px;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+.hero-tagline,.eyebrow {
+    font-family:ui-monospace,SFMono-Regular,monospace;
+    font-size:12px;
+    letter-spacing:2px;
+    font-weight:650;
+    color:var(--accent);
+    margin:0 0 20px;
+}
+.status-badge {
+    font-size:12px;
+    color:var(--muted);
+}
+.hero-name {
+    font-size:clamp(38px,5vw,64px);
+    line-height:1.1;
+    letter-spacing:-2px;
+    font-weight:750;
+    margin:24px 0 30px;
+    display:flex;
+    align-items:baseline;
+    gap:22px;
+    flex-wrap:wrap;
+}
+.hero-name-en {
+    font-size:16px;
+    letter-spacing:0;
+    color:var(--muted);
+    font-weight:450;
+}
+.hero-statement {
+    font-size:clamp(32px,4.8vw,65px);
+    font-weight:700;
+    line-height:1.24;
+    letter-spacing:-2.8px;
+    margin:0 0 24px;
+    text-wrap:balance;
+}
+.hero-description {
+    color:var(--muted);
+    font-size:17px;
+    margin:0 0 24px;
+}
+.hero-cta {
+    display:inline-flex;
+    gap:30px;
+    align-items:center;
+    min-height:48px;
+    font-size:15px;
+    font-weight:650;
+    text-decoration:none;
+    border-bottom:1px solid var(--ink);
+}
+.hero-cta:hover {
+    color:var(--accent);
+}
+.personal-info {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px 36px;
+    margin-top:48px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    font-size:14px;
+}
+.info-item {
+    min-width:0;
+}
+.info-item b {
+    font-family:ui-monospace,monospace;
+    font-size:11px;
+    letter-spacing:.3px;
+    color:var(--muted);
+    display:block;
+    font-weight:450;
+    margin-bottom:4px;
+}
+.contact-link {
+    overflow-wrap:anywhere;
+    text-decoration:none;
+}
+.contact-link:hover {
+    text-decoration:underline;
+}
+.info-item-sub {
+    font-size:12px;
+    color:var(--muted);
+}
+section {
+    margin-bottom:96px;
+    scroll-margin-top:104px;
+}
+h2 {
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    font-size:30px;
+    line-height:1.25;
+    letter-spacing:-1px;
+    font-weight:650;
+    margin:0 0 32px;
+}
+h2::before {
+    font-size:11px;
+    font-family:ui-monospace,monospace;
+    letter-spacing:0;
+    color:var(--muted);
+}
+#section-about h2::before {
+    content:'01 /';
+}
+#section-experience h2::before {
+    content:'02 /';
+}
+#section-toy h2::before {
+    content:'03 /';
+}
+#section-skills h2::before {
+    content:'04 /';
+}
+.about-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0 40px;
+}
+.about-card {
+    display:flex;
+    gap:18px;
+    align-items:baseline;
+    padding:22px 0;
+    border-top:1px solid var(--line);
+}
+.about-card--featured {
+    grid-column:1/-1;
+}
+.about-icon {
+    font-family:ui-monospace,monospace;
+    color:var(--accent);
+    font-size:12px;
+}
+.about-content {
+    font-size:16px;
+}
+.about-card--featured .about-content {
+    font-size:24px;
+    letter-spacing:-.6px;
+    font-weight:600;
+    max-width:800px;
+}
+.company-group {
+    position:relative;
+    padding-left:250px;
+    margin-bottom:48px;
+    min-height:220px;
+}
+.company-info {
+    position:absolute;
+    left:0;
+    top:20px;
+    width:210px;
+}
+.company-name {
+    font-size:21px;
+    font-weight:700;
+    letter-spacing:-.5px;
+}
+.company-desc {
+    font-size:14px;
+    color:var(--muted);
+    margin:10px 0 18px;
+}
+.company-info>div:last-child {
+    line-height:1.8;
+}
+.project-card {
+    padding:26px 0;
+    border-top:1px solid var(--line);
+    min-width:0;
+}
+.project-title {
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:-.5px;
+    line-height:1.4;
+}
+.project-title .badge-group {
+    margin-top:12px;
+}
+.project-title>span.badge {
+    margin-left:6px;
+    vertical-align:middle;
+}
+.project-card p {
+    max-width:76ch;
+}
+.badge-group {
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+}
+.badge {
+    display:inline-flex;
+    padding:4px 9px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0;
+    color:var(--muted);
+    line-height:1.5;
+}
+.badge.blue {
+    color:var(--accent);
+    background:var(--soft);
+    border-color:var(--soft);
+}
+.tech-tags {
+    display:flex;
+    gap:6px 14px;
+    flex-wrap:wrap;
+    margin-top:16px;
+}
+.tech-tag {
+    font-family:ui-monospace,monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:.2px;
+}
+.btn-wrapper {
+    display:flex;
+    gap:16px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-top:22px;
+}
+.link-btn {
+    display:inline-flex;
+    min-height:44px;
+    align-items:center;
+    gap:18px;
+    border:1px solid var(--line);
+    padding:8px 16px;
+    border-radius:5px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    transition:background 180ms,color 180ms,border-color 180ms;
+}
+.link-btn:hover {
+    background:var(--ink);
+    border-color:var(--ink);
+    color:white;
+}
+.toy-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px 44px;
+}
+.toy-card--featured {
+    grid-column:1/-1;
+}
+.toy-role-list {
+    font-size:14px;
+    padding-left:18px;
+    margin:20px 0 0;
+}
+.toy-role-list li {
+    margin:8px 0;
+}
+.toy-role-list strong {
+    color:var(--accent);
+}
+.toy-ai-note {
+    background:var(--soft);
+    padding:16px;
+    font-size:14px;
+    border-radius:6px;
+}
+.hankki-feature {
+    display:grid;
+    grid-template-columns:1.05fr 1fr;
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    padding:0;
+    margin-bottom:12px;
+    background:var(--card);
+    scroll-margin-top:105px;
+}
+.hankki-copy {
+    padding:36px;
+}
+.hankki-copy h3 {
+    font-size:38px;
+    line-height:1.25;
+    letter-spacing:-1.5px;
+    margin:16px 0 20px;
+}
+.hankki-copy h3 span {
+    display:block;
+    font-size:23px;
+    margin-top:16px;
+    font-weight:550;
+    letter-spacing:-.7px;
+    line-height:1.45;
+}
+.hankki-copy>p:not(.eyebrow) {
+    font-size:15px;
+    color:var(--muted);
+}
+.hankki-copy .link-btn {
+    background:var(--accent);
+    border-color:var(--accent);
+    color:white;
+}
+.hankki-copy .link-btn:hover {
+    background:var(--ink);
+    border-color:var(--ink);
+}
+.text-link {
+    font-size:13px;
+    display:inline-flex;
+    min-height:44px;
+    align-items:center;
+    gap:8px;
+}
+.hankki-visual {
+    background:#e4e9de;
+    padding:34px 24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    overflow:hidden;
+}
+.visual-label {
+    font-family:ui-monospace,monospace;
+    font-size:10px;
+    letter-spacing:1.3px;
+    color:#3d5445;
+    margin:0 0 28px;
+    text-align:center;
+}
+.app-screens {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+}
+.app-screens img {
+    width:calc(50% - 10px);
+    max-width:190px;
+    border:6px solid #242c27;
+    border-radius:23px;
+    box-shadow:0 14px 24px #1b32241c;
+    aspect-ratio:9/20;
+    object-fit:contain;
+    background:#f7f7f2;
+}
+.app-screens img:last-child {
+    margin-top:68px;
+}
+.visual-caption {
+    text-align:center;
+    font-size:13px;
+    color:#3d5445;
+    margin:28px 0 0;
+}
+.skills-container {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0 40px;
+}
+.skill-box {
+    border-top:1px solid var(--line);
+    padding:20px 0;
+    font-size:15px;
+}
+.skill-box b {
+    display:block;
+    font-size:12px;
+    font-family:ui-monospace,monospace;
+    color:var(--accent);
+    margin-bottom:12px;
+    letter-spacing:1px;
+}
+.highlight-red {
+    color:#a3352d;
+}
+.site-footer {
+    border-top:1px solid var(--line);
+    padding:48px 0 24px;
+}
+.site-footer>p {
+    font-size:24px;
+    letter-spacing:-.6px;
+    margin:0 0 12px;
+}
+.site-footer>a {
+    font-size:clamp(17px,3vw,28px);
+    overflow-wrap:anywhere;
+}
+.site-footer>div {
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    font-size:12px;
+    color:var(--muted);
+    margin-top:64px;
+}
+.site-footer>div span {
+    margin-right:auto;
+}
+.site-footer>div a {
+    min-height:44px;
+}
+.nav-links a {
+    transition:color 180ms;
+    min-width:44px;
+    justify-content:center;
+}
+@media(min-width:1000px) {
+    header {
+        background:linear-gradient(90deg,transparent 76%,var(--line) 76%,var(--line) calc(76% + 1px),transparent calc(76% + 1px));
+    }
+    .personal-info {
+        max-width:70%;
+    }
+}
+@media(max-width:900px) {
+    .company-group {
+        padding-left:200px;
+    }
+    .company-info {
+        width:170px;
+    }
+    .hankki-feature {
+        grid-template-columns:1fr;
+    }
+    .hankki-visual {
+        padding:32px;
+    }
+    .app-screens img {
+        max-width:200px;
+    }
+    .hankki-copy {
+        padding:30px;
+    }
+    .app-screens {
+        gap:28px;
+    }
+    .app-screens img:last-child {
+        margin-top:32px;
+    }
+}
+@media(max-width:600px) {
+    :root {
+        --space:22px;
+    }
+    .site-nav {
+        min-height:74px;
+        gap:16px;
+    }
+    .nav-links {
+        gap:16px;
+    }
+    .site-nav .nav-contact {
+        display:none;
+    }
+    .site-nav a {
+        font-size:13px;
+    }
+    .site-nav .wordmark {
+        font-size:22px;
+    }
+    html {
+        scroll-padding-top:90px;
+    }
+    header {
+        padding-top:42px;
+        margin-bottom:56px;
+    }
+    .header-hero-row {
+        gap:2px;
+    }
+    .hero-tagline {
+        font-size:11px;
+    }
+    .status-badge {
+        font-size:10px;
+    }
+    .hero-name {
+        gap:12px;
+        margin:24px 0;
+    }
+    .hero-name-en {
+        font-size:14px;
+    }
+    .hero-statement {
+        font-size:34px;
+        letter-spacing:-1.6px;
+    }
+    .hero-description {
+        font-size:15px;
+    }
+    .personal-info {
+        grid-template-columns:minmax(0,1fr);
+        gap:18px;
+        margin-top:32px;
+    }
+    .info-item--edu {
+        display:block;
+    }
+    .about-grid,.toy-grid,.skills-container {
+        grid-template-columns:minmax(0,1fr);
+        gap:0;
+    }
+    .about-card--featured .about-content {
+        font-size:21px;
+    }
+    .company-group {
+        padding:0;
+        margin-bottom:40px;
+    }
+    .company-info {
+        position:static;
+        width:auto;
+        margin-bottom:24px;
+        padding-top:12px;
+    }
+    .company-desc {
+        margin-bottom:12px;
+    }
+    .project-card {
+        padding:24px 0;
+    }
+    .project-title {
+        font-size:19px;
+    }
+    .hankki-feature {
+        padding:0;
+        margin-bottom:28px;
+    }
+    .hankki-copy {
+        padding:24px;
+    }
+    .hankki-copy h3 {
+        font-size:32px;
+    }
+    .hankki-copy h3 span {
+        font-size:21px;
+    }
+    .hankki-visual {
+        padding:28px 18px;
+    }
+    .app-screens {
+        gap:12px;
+    }
+    .app-screens img {
+        border-width:4px;
+        border-radius:17px;
+    }
+    .visual-label {
+        font-size:9px;
+    }
+    .eyebrow {
+        font-size:10px;
+        letter-spacing:1.2px;
+    }
+    section {
+        margin-bottom:64px;
+    }
+    h2 {
+        font-size:26px;
+        gap:12px;
+        margin-bottom:24px;
+    }
+    .site-footer>p {
+        font-size:21px;
+    }
+    .site-footer>div {
+        margin-top:40px;
+    }
+    .site-footer>div span {
+        width:100%;
+    }
+}
+@media(prefers-reduced-motion:reduce) {
+    html {
+        scroll-behavior:auto;
+    }
+    *,*::before,*::after {
+        transition:none!important;
+        animation:none!important;
+    }
+}
+@media print {
+    @page {
+        margin:16mm;
+    }
+    body {
+        background:white;
+        font-size:11pt;
+    }
+    .site-shell {
+        padding:0;
+        max-width:none;
+    }
+    .site-nav,.skip-link,.hero-cta {
+        display:none;
+    }
+    .hero-statement {
+        font-size:28pt;
+    }
+    .hero-name {
+        font-size:25pt;
+    }
+    header {
+        padding-top:0;
+    }
+    .personal-info {
+        max-width:none;
+        grid-template-columns:1fr 1fr;
+    }
+    .info-item--edu {
+        display:block;
+    }
+    section {
+        margin-bottom:32px;
+    }
+    .company-group {
+        padding-left:180px;
+    }
+    .company-info {
+        position:absolute;
+        width:155px;
+    }
+    .project-card {
+        break-inside:avoid;
+    }
+    .hankki-feature {
+        display:block;
+    }
+    .hankki-visual {
+        display:none;
+    }
+    .hankki-copy {
+        padding:20px;
+    }
+    .site-footer {
+        break-inside:avoid;
+    }
+    a {
+        text-decoration:none;
+    }
+}

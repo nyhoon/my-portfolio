@@ -4,69 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>남영훈 | Android Engineer Portfolio</title>
+    <meta name="description" content="Android 개발자 남영훈의 포트폴리오. 모바일 서비스 개발·운영 경험과 직접 출시한 오늘한끼, NeoFall, PocoPet 프로젝트를 소개합니다.">
+    <meta property="og:title" content="남영훈 | Android Engineer Portfolio">
+    <meta property="og:description" content="모바일 앱 설계부터 출시, 운영까지. Android 개발자 남영훈의 경력과 개인 프로젝트.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nyhoon.github.io/my-portfolio/">
+    <link rel="canonical" href="https://nyhoon.github.io/my-portfolio/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-    <link rel="stylesheet" href="css/01-base-and-launch.css">
-    <link rel="stylesheet" href="css/02-chrome-and-shell.css">
-    <link rel="stylesheet" href="css/03-content-and-timeline.css">
-    <link rel="stylesheet" href="css/04-cards-and-responsive.css">
+    <link rel="stylesheet" href="css/portfolio.css">
 </head>
 <body>
-
-<div class="phone-frame">
-    <div class="phone-notch"></div>
-    <div class="screen" id="phoneScreen">
-        <div class="launch-overlay" id="launchOverlay" role="dialog" aria-modal="true" aria-labelledby="launchAppLabel">
-            <div class="launch-wallpaper" aria-hidden="true"></div>
-            <div class="status-bar status-bar--launch">
-                <span class="js-status-clock" aria-hidden="true">00:00</span>
-                <div style="display: flex; gap: 8px;">
-                    <span>📶</span>
-                    <span>🔋 100%</span>
-                </div>
-            </div>
-            <div class="launch-overlay-main">
-                <button type="button" class="launch-app-btn" id="launchAppBtn" aria-labelledby="launchAppLabel">
-                    <span class="launch-app-icon" aria-hidden="true">📱</span>
-                    <span class="launch-app-label" id="launchAppLabel">Portfolio</span>
-                </button>
-                <p class="launch-hint">탭하여 열기</p>
-            </div>
-        </div>
-        <div class="screen-scroll" id="screenScroll">
-            <div class="screen-top-chrome">
-                <div class="status-bar">
-                    <span class="js-status-clock">00:00</span>
-                    <div style="display: flex; gap: 8px;">
-                        <span aria-hidden="true">📶</span>
-                        <span aria-hidden="true">🔋 100%</span>
-                    </div>
-                </div>
-                <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="페이지 스크롤 진행">
-                    <div class="scroll-progress__fill" id="scrollProgressFill"></div>
-                </div>
-            </div>
-
-            <div class="container">
+<a class="skip-link" href="#portfolio-top">본문으로 건너뛰기</a>
+<div class="site-shell">
+    <nav class="site-nav" aria-label="주요 메뉴"><a class="wordmark" href="#portfolio-top" aria-label="남영훈 포트폴리오 처음으로">NYH<span>.</span></a><div class="nav-links"><a href="#section-about">소개</a><a href="#section-experience">경력</a><a href="#section-toy">프로젝트</a><a href="#section-skills">스킬</a></div><a class="nav-contact" href="mailto:feelsogxxd@naver.com">연락하기 <span aria-hidden="true">↗</span></a></nav>
+    <main class="container">
                 <header id="portfolio-top">
                     <div class="header-top">
                         <div class="name-area">
                             <div class="header-hero-row">
                                 <p class="hero-tagline">ANDROID ENGINEER</p>
-                                <div class="status-badge">🎂 1992.02.20 / 💍 기혼 / 💂 의무경찰 만기제대</div>
+                                <div class="status-badge">1992.02.20 · 기혼 · 의무경찰 만기제대</div>
                             </div>
-                            <h1 class="hero-name">남영훈 <span class="exp-badge">7&nbsp;년차</span></h1>
+                            <h1 class="hero-name">남영훈<span class="hero-name-en">Younghoon Nam</span></h1>
+                            <p class="hero-statement">만드는 것에서 끝내지 않고,<br>쓰이는 서비스로.</p>
+                            <p class="hero-description">Android Engineer · 7년차<br>모바일 앱 설계부터 출시, 운영까지 함께합니다.</p>
+                            <a class="hero-cta" href="#project-today-hankki">최근 출시한 오늘한끼 보기 <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                     <div class="personal-info">
-                        <div class="info-item"><b>✉️ E-Mail</b> <a class="contact-link" href="mailto:feelsogxxd@naver.com">feelsogxxd@naver.com</a></div>
-                        <div class="info-item"><b>📞 Phone</b> <a class="contact-link" href="tel:+821071927102">010-7192-7102</a></div>
+                        <div class="info-item"><b>E-mail</b> <a class="contact-link" href="mailto:feelsogxxd@naver.com">feelsogxxd@naver.com</a></div>
+                        <div class="info-item"><b>Phone</b> <a class="contact-link" href="tel:+821071927102">010-7192-7102</a></div>
                         <div class="info-item info-item--edu">
-                            <b>🏫 High</b>
+                            <b>High school</b>
                             <span>흥진고등학교 졸업</span>
                             <div class="info-item-sub">2007.03 - 2010.01 졸업</div>
                         </div>
                         <div class="info-item info-item--edu">
-                            <b>🎓 Univ</b>
+                            <b>University</b>
                             <span>국립한국교통대 소프트웨어학 학사</span>
                             <div class="info-item-sub">2012.03 - 2019.02 졸업</div>
                         </div>
@@ -74,22 +48,22 @@
                 </header>
 
                 <section id="section-about">
-                    <h2>🙋 About me</h2>
+                    <h2>About me</h2>
                     <div class="about-grid">
                         <div class="about-card about-card--featured">
-                            <div class="about-icon">🌱</div>
+                            <div class="about-icon" aria-hidden="true">01</div>
                             <div class="about-content">한 회사에 오래 머물며, 서비스를 안정적으로 성장시키고 싶습니다.</div>
                         </div>
-                        <div class="about-card"><div class="about-icon">🚀</div><div class="about-content">앱 설계부터 스토어 릴리즈, 운영 관리까지 서비스 전 사이클 경험</div></div>
-                        <div class="about-card"><div class="about-icon">📈</div><div class="about-content">누적 10만 다운로드 이상의 대규모 서비스 운영 및 유지보수 능력</div></div>
-                        <div class="about-card"><div class="about-icon">🏢</div><div class="about-content">20인 규모 이상의 복합적인 대규모 협업 프로젝트 완수</div></div>
-                        <div class="about-card"><div class="about-icon">🔍</div><div class="about-content">팀의 동반 성장을 이끄는 유연하고 생산적인 코드 지향</div></div>
-                        <div class="about-card"><div class="about-icon">🤝</div><div class="about-content">능동적인 의견 조율로 프로젝트의 방향성을 잡는 커뮤니케이터</div></div>
+                        <div class="about-card"><div class="about-icon" aria-hidden="true">02</div><div class="about-content">앱 설계부터 스토어 릴리즈, 운영 관리까지 서비스 전 사이클 경험</div></div>
+                        <div class="about-card"><div class="about-icon" aria-hidden="true">03</div><div class="about-content">누적 10만 다운로드 이상의 대규모 서비스 운영 및 유지보수 능력</div></div>
+                        <div class="about-card"><div class="about-icon" aria-hidden="true">04</div><div class="about-content">20인 규모 이상의 복합적인 대규모 협업 프로젝트 완수</div></div>
+                        <div class="about-card"><div class="about-icon" aria-hidden="true">05</div><div class="about-content">팀의 동반 성장을 이끄는 유연하고 생산적인 코드 지향</div></div>
+                        <div class="about-card"><div class="about-icon" aria-hidden="true">06</div><div class="about-content">능동적인 의견 조율로 프로젝트의 방향성을 잡는 커뮤니케이터</div></div>
                     </div>
                 </section>
 
                 <section id="section-experience">
-                    <h2>💼 Experience</h2>
+                    <h2>Experience</h2>
                     <div class="experience-wrapper">
                         <div class="company-group active">
                             <div class="company-info">
@@ -102,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : NHN Dooray! 그룹웨어 앱 고도화
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : NHN Dooray! 그룹웨어 앱 고도화
                                     <div class="badge-group"><span class="badge outline">10~20인 협업</span><span class="badge outline">리팩토링</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 20%</span></div>
                                 </div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2025.06 ~ 2026.06 (연장요청으로 4월에서 6월)</div>
@@ -110,7 +84,7 @@
                                 <div class="tech-tags">
                                     <span class="tech-tag">KOTLIN</span><span class="tech-tag">MVI</span><span class="tech-tag">JUNIT</span><span class="tech-tag">KMP</span><span class="tech-tag">CLEAN ARCHITECTURE</span><span class="tech-tag">CI/CD</span>
                                 </div>
-                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.dooray.all" class="link-btn" target="_blank">Google Play ↗</a></div>
+                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.dooray.all" class="link-btn" target="_blank" rel="noopener noreferrer">Google Play ↗</a></div>
                             </div>
                         </div>
 
@@ -125,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : KT 안심박스 앱 운영 및 QA 추가개발
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : KT 안심박스 앱 운영 및 QA 추가개발
                                     <div class="badge-group"><span class="badge outline">추가 개발 및 운영</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 30%</span></div>
                                 </div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2024.07 ~ 2025.05</div>
@@ -133,7 +107,7 @@
                                 <div class="tech-tags">
                                     <span class="tech-tag">KOTLIN</span><span class="tech-tag">MVVM</span><span class="tech-tag">BLE</span><span class="tech-tag">WI-FI</span><span class="tech-tag">GPS</span>
                                 </div>
-                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.kt.familysafeandroid" class="link-btn" target="_blank">Google Play ↗</a></div>
+                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.kt.familysafeandroid" class="link-btn" target="_blank" rel="noopener noreferrer">Google Play ↗</a></div>
                             </div>
                         </div>
 
@@ -148,13 +122,13 @@
                                 </div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 골라 (Golla) 앱 신규 개발<div class="badge-group"><span class="badge outline">신규 개발</span><span class="badge blue">기여도 80%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 골라 (Golla) 앱 신규 개발<div class="badge-group"><span class="badge outline">신규 개발</span><span class="badge blue">기여도 80%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2023.12 ~ 2024.03</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>Flutter를 이용한 골프 조인 매칭 플랫폼의 설계 및 개발 전 과정을 전담</strong>했습니다. 회사에 상황에 맞춰 FLUUTER 를 공부하며 도입하여 AOS/iOS 동시 대응 환경을 구축하여 개발 기간을 단축하였으나 회사 사정으로 완성되지 못한 개발입니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">FLUTTER</span><span class="tech-tag">DART</span><span class="tech-tag">MVVM</span></div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 골프 인도어 키오스크 앱<div class="badge-group"><span class="badge outline">리뉴얼 및 운영</span><span class="badge blue">기여도 30%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 골프 인도어 키오스크 앱<div class="badge-group"><span class="badge outline">리뉴얼 및 운영</span><span class="badge blue">기여도 30%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2023.10 ~ 2024.03</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>TCP/IP 기반 소켓 통신 및 하드웨어 제어 안정성을 개선</strong>했습니다. 태블릿용 앱과 ExoPlayer를 커스텀하여 인도어 연습장 환경에 최적화된 저지연 미디어 재생 시스템을 구축했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">TCP/IP</span><span class="tech-tag">EXOPLAYER</span></div>
@@ -172,18 +146,18 @@
                                 </div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 후다닥 케어 (비대면 진료) 앱 운영 및 개발<div class="badge-group"><span class="badge outline">신규 개발 및 운영</span><span class="badge blue">기여도 80%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 후다닥 케어 (비대면 진료) 앱 운영 및 개발<div class="badge-group"><span class="badge outline">신규 개발 및 운영</span><span class="badge blue">기여도 80%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2022.09 ~ 2023.07</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>비대면 진료부터 처방전 팩스전송, 약 배달까지 올인원 네이티브 앱을 구축</strong>했습니다. 실시간 영상 진료 API 연동부터 복잡한 결제/처방전 프로세스를 아키텍처 중심으로 설계했습니다. 특히 <strong>FCM을 통한 맞춤형 푸시 알림과 특정 진료 예약/결제 화면으로 연결되는 랜딩 페이지 로직을 구현</strong>하여 서비스 접근성을 높였으며, GA로 기종별 오류를 분석해 안정성을 확보했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">KOTLIN</span><span class="tech-tag">FCM</span><span class="tech-tag">DEEP LINK</span><span class="tech-tag">HILT</span><span class="tech-tag">GOOGLE ANALYTICS</span></div>
-                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.whodadoc.td" class="link-btn" target="_blank">Google Play ↗</a></div>
+                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.whodadoc.td" class="link-btn" target="_blank" rel="noopener noreferrer">Google Play ↗</a></div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 후다닥 건강 운영 및 개발<div class="badge-group"><span class="badge outline">리뉴얼 및 운영</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 80%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 후다닥 건강 운영 및 개발<div class="badge-group"><span class="badge outline">리뉴얼 및 운영</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 80%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2022.07 ~ 2023.07</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>레거시 Java 코드베이스를 Kotlin으로 전환</strong>했습니다. 하이브리드 앱 환경에서 JavaScript Interface 최적화를 통해 웹-네이티브 간 통신 성능을 개선했습니다. <strong>Firebase 푸시 시스템을 고도화하여 최신 건강 콘텐츠 및 이벤트로 자동 랜딩되는 구조를 설계</strong>했으며, GA 연동으로 기종별 크래시 로그를 실시간 모니터링하여 대응했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">KOTLIN</span><span class="tech-tag">FCM</span><span class="tech-tag">DEEP LINK</span><span class="tech-tag">GOOGLE ANALYTICS</span></div>
-                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.idop.whodadoc.mc" class="link-btn" target="_blank">Google Play ↗</a></div>
+                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.idop.whodadoc.mc" class="link-btn" target="_blank" rel="noopener noreferrer">Google Play ↗</a></div>
                             </div>
                         </div>
 
@@ -198,13 +172,13 @@
                                 </div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : PBM (정부과제) - 우울증 분석 정보 제공 앱<div class="badge-group"><span class="badge outline">신규 개발</span><span class="badge blue">기여도 70%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : PBM (정부과제) - 우울증 분석 정보 제공 앱<div class="badge-group"><span class="badge outline">신규 개발</span><span class="badge blue">기여도 70%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2022.05 ~ 2022.07</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>BLE 실시간 통신을 통한 뇌 활성도 측정 앱을 신규 개발</strong>했습니다. NDK를 통해 전송되는 대용량 데이터를 받아 차트화 하는 기능을 구현했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">KOTLIN</span><span class="tech-tag">MVVM</span><span class="tech-tag">BLE</span><span class="tech-tag">NDK</span></div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 웅진 KIDS - 영유아 뇌 발달 활성도 측정 및 시각화 앱<div class="badge-group"><span class="badge outline">추가 개발 및 운영</span><span class="badge blue">기여도 20%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 웅진 KIDS - 영유아 뇌 발달 활성도 측정 및 시각화 앱<div class="badge-group"><span class="badge outline">추가 개발 및 운영</span><span class="badge blue">기여도 20%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2022.02 ~ 2022.05</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>NIRS(근적외선 분광분석기)를 활용한 영유아 전용 뇌 활성도 측정 인터페이스를 개발</strong>했습니다. 측정된 데이터를 부모나 전문가가 이해하기 쉬운 놀이와 그래프와 캐릭터 애니메이션으로 실시간 렌더링하는 기능을 구현했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">KOTLIN</span><span class="tech-tag">MVVM</span><span class="tech-tag">BLE</span><span class="tech-tag">NDK</span></div>
@@ -222,18 +196,18 @@
                                 </div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 좋은케어 (상담 & 간병 매칭 앱)<div class="badge-group"><span class="badge outline">리팩토링 및 추가개발 / 운영</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 80%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 좋은케어 (상담 & 간병 매칭 앱)<div class="badge-group"><span class="badge outline">리팩토링 및 추가개발 / 운영</span><span class="badge outline">누적 10만+</span><span class="badge blue">기여도 80%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2020.08 ~ 2021.12</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>통합 케어 서비스를 위한 환자-간병인 매칭 및 상담 시스템을 구축</strong>했습니다. WebRTC 기반의 1:1 비대면 영상 상담 기능을 개발하고, Naver Map API를 활용한 위치 기반 매칭 시스템을 구현했습니다. 특히 <strong>FCM을 활용한 앱 푸시 시스템을 구축하여, 알림 클릭 시 특정 콘텐츠나 상담 화면으로 즉시 연결되는 랜딩 페이지 이동 로직을 구현</strong>했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">WEBRTC</span><span class="tech-tag">FCM</span><span class="tech-tag">DEEP LINK</span><span class="tech-tag">NAVER API</span><span class="tech-tag">AAC</span><span class="tech-tag">GOOGLE ANALYTICS</span></div>
-                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.unimewo.careclient" class="link-btn" target="_blank">Google Play ↗</a></div>
+                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.unimewo.careclient" class="link-btn" target="_blank" rel="noopener noreferrer">Google Play ↗</a></div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 좋은간병인 일자리 찾기 (간병사 전용)<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발 / 운영</span><span class="badge blue">기여도 70%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 좋은간병인 일자리 찾기 (간병사 전용)<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발 / 운영</span><span class="badge blue">기여도 70%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2020.08 ~ 2021.12</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>간병사들이 실시간으로 일자리 공고를 확인하고 지원할 수 있는 전용 애플리케이션을 개발</strong>했습니다. <strong>Firebase 푸시 알림을 통해 맞춤형 일자리 정보를 실시간으로 제공하고, 앱 내 상세 공고 페이지로의 자동 랜딩 구조를 설계</strong>하여 지원율을 높였습니다. AAC를 적용하여 데이터 일관성을 유지하고 안정적인 UI 환경을 구현했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">AAC</span><span class="tech-tag">FCM</span><span class="tech-tag">FIREBASE</span><span class="tech-tag">GOOGLE ANALYTICS</span></div>
-                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.unimewo.careemployee" class="link-btn" target="_blank">Google Play ↗</a></div>
+                                <div class="btn-wrapper"><a href="https://play.google.com/store/apps/details?id=com.unimewo.careemployee" class="link-btn" target="_blank" rel="noopener noreferrer">Google Play ↗</a></div>
                             </div>
                         </div>
 
@@ -248,19 +222,19 @@
                                 </div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 고기자판기 애플리케이션<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발</span><span class="badge blue">기여도 60%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 고기자판기 애플리케이션<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발</span><span class="badge blue">기여도 60%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2019.12 ~ 2020.02</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>Serial Port 통신을 이용한 고기 자판기 하드웨어 제어 시스템을 고도화</strong>했습니다. 사용자가 선택한 상품이 정확히 토출되도록 통신 로직을 안정화했으며, Firebase를 연동하여 실시간 재고 상태 및 장비 현황을 관리할 수 있는 환경을 구축했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">SERIAL COMMUNICATION</span><span class="tech-tag">FIREBASE</span></div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 스마트오더 애플리케이션 (QR 결제 및 선 주문)<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발 / 운영</span><span class="badge blue">기여도 40%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 스마트오더 애플리케이션 (QR 결제 및 선 주문)<div class="badge-group"><span class="badge outline">유지보수 및 추가 개발 / 운영</span><span class="badge blue">기여도 40%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2020.01 ~ 2020.03</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>QR 코드 인식 기반의 결제 시스템과 픽업 선 주문 로직을 개발</strong>했습니다. 오프라인 매장의 효율적인 주문 처리를 위해 Firebase Realtime Database를 활용한 주문 접수 및 알림 시스템을 구현하여 비대면 주문 환경을 최적화했습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">QR CODE</span><span class="tech-tag">FIREBASE</span></div>
                             </div>
                             <div class="project-card">
-                                <div class="project-title">프로젝트 : 푸드 키오스크 (S방송사 XX식당 - 대전 청년구단)<div class="badge-group"><span class="badge outline">리뉴얼 및 리팩토링</span><span class="badge blue">기여도 40%</span></div></div>
+                                <div class="project-title" role="heading" aria-level="3">프로젝트 : 푸드 키오스크 (S방송사 XX식당 - 대전 청년구단)<div class="badge-group"><span class="badge outline">리뉴얼 및 리팩토링</span><span class="badge blue">기여도 40%</span></div></div>
                                 <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 8px 0;">진행 기간 : 2020.03 ~ 2020.06</div>
                                 <p style="font-size: 0.9rem; line-height: 1.5;">역할 : <strong>방송 협찬용 커스터마이징 키오스크의 UI 리뉴얼 및 앱 리팩토링을</strong>했습니다. 다국어 지원을 위한 UI 확장 구조를 설계하고, 주문 시스템의 로직을 정리하여 유지보수성을 높였습니다.</p>
                                 <div class="tech-tags"><span class="tech-tag">JAVA</span><span class="tech-tag">MVC</span><span class="tech-tag">FIREBASE</span></div>
@@ -270,10 +244,32 @@
                 </section>
 
                 <section id="section-toy">
-                    <h2>💻 Toy Projects</h2>
+                    <h2>Toy projects</h2>
                     <div class="toy-grid">
+                        <article class="project-card toy-card--featured hankki-feature" id="project-today-hankki" aria-labelledby="hankki-title">
+                            <div class="hankki-copy">
+                                <p class="eyebrow">LATEST RELEASE · 2026.10</p>
+                                <h3 id="hankki-title">오늘한끼<span>사둔 재료를 챙기는 일부터,<br>오늘의 메뉴를 찾는 일까지.</span></h3>
+                                <p>식재료와 소비기한을 관리하고, 보유 재료로 만들 요리를 찾는 모바일 앱입니다. 재료 등록 → 레시피 확인 → 장보기 → 요리 후 재고 정리를 하나의 흐름으로 연결했습니다.</p>
+                                <div class="badge-group"><span class="badge blue">Google Play 출시</span><span class="badge outline">1인 기획·개발·운영</span></div>
+                                <ul class="toy-role-list">
+                                    <li><strong>재료 등록</strong> — 영수증 OCR과 포장 날짜 인식, 사용자 확인 후 저장</li>
+                                    <li><strong>재고 관리</strong> — 냉장·냉동·실온 보관, 표시 날짜와 남은 상태 관리</li>
+                                    <li><strong>레시피 연결</strong> — 보유 재료 매칭, 부족한 재료 장보기, 요리 후 재고 반영</li>
+                                    <li><strong>출시·운영</strong> — 인증, 푸시 알림, 운영 DB, Android 배포와 스토어 운영</li>
+                                </ul>
+                                <div class="tech-tags"><span class="tech-tag">Flutter / Dart</span><span class="tech-tag">Supabase</span><span class="tech-tag">ONNX OCR</span><span class="tech-tag">ML Kit / Apple Vision</span><span class="tech-tag">Firebase</span></div>
+                                <div class="btn-wrapper"><a class="link-btn" href="https://play.google.com/store/apps/details?id=dev.neuralagent.todayhankki" target="_blank" rel="noopener noreferrer">Google Play에서 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://nyhoon.github.io/today-hankki-site/" target="_blank" rel="noopener noreferrer">서비스 소개 <span aria-hidden="true">↗</span></a></div>
+                            </div>
+                            <div class="hankki-visual">
+                                <p class="visual-label">TODAY HANKKI / 실제 앱 화면</p>
+                                <div class="app-screens"><img src="assets/today-hankki-home.webp" width="1080" height="2400" alt="오늘한끼 홈: 보관 재료와 기한 임박 재료를 확인하는 화면" loading="lazy"><img src="assets/today-hankki-inventory.webp" width="1080" height="2400" alt="오늘한끼 재료 보관함: 두부, 애호박, 달걀의 보관 위치와 소비기한을 확인하는 화면" loading="lazy"></div>
+                                <p class="visual-caption">보관 중인 재료와 표시 기한을 한눈에.</p>
+                            </div>
+                        </article>
+
                                                 <div class="project-card toy-card--featured">
-                            <div class="project-title">
+                            <div class="project-title" role="heading" aria-level="3">
                                 NEOFALL — INFINITE FALL
                                 <div class="badge-group">
                                     <span class="badge blue">1인 기획·개발·운영</span>
@@ -340,7 +336,7 @@
                             </div>
                         </div>
                         <div class="project-card toy-card--featured">
-                            <div class="project-title">PocoPet — 오버레이 힐링 비서 펫
+                            <div class="project-title" role="heading" aria-level="3">PocoPet — 오버레이 힐링 비서 펫
                                 <div class="badge-group">
                                     <span class="badge blue">1인 기획·개발·운영</span>
                                     <span class="badge outline">AI 대화</span>
@@ -370,25 +366,25 @@
                             </div>
                         </div>
                         <div class="project-card">
-                            <div class="project-title">주식 자동매매 앱 <span class="badge outline">Fin-Tech</span></div>
+                            <div class="project-title" role="heading" aria-level="3">주식 자동매매 앱 <span class="badge outline">Fin-Tech</span></div>
                             <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">한국투자증권 Open API 연동</div>
                             <p style="font-size: 0.85rem;">AI 추천 종목을 추적하고 24시간 백그라운드로 시장을 감시하는 개인 비서 안드로이드 앱</p>
                             <div class="tech-tags"><span class="tech-tag">PYTHON</span><span class="tech-tag">KOTLIN</span></div>
                         </div>
                         <div class="project-card">
-                            <div class="project-title">바람의나라 클래식 매크로 <span class="badge outline">Automation</span></div>
+                            <div class="project-title" role="heading" aria-level="3">바람의나라 클래식 매크로 <span class="badge outline">Automation</span></div>
                             <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">OpenCV / OCR 인식 활용</div>
                             <p style="font-size: 0.85rem;">반복적인 퀘스트와 스킬 사용을 자동화하며 효율을 높인 비영리 개인 프로젝트</p>
                             <div class="tech-tags"><span class="tech-tag">PYTHON</span><span class="tech-tag">OPENCV</span><span class="tech-tag">OCR</span></div>
                         </div>
                         <div class="project-card">
-                            <div class="project-title">장학재단 웹 구축 <span class="badge outline">Web</span></div>
+                            <div class="project-title" role="heading" aria-level="3">장학재단 웹 구축 <span class="badge outline">Web</span></div>
                             <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">PHP / Cafe24 호스팅</div>
                             <p style="font-size: 0.85rem;">재단 정보를 효과적으로 전달하고 관리할 수 있는 공식 웹사이트를 제작</p>
                             <div class="tech-tags"><span class="tech-tag">PHP</span><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">MYSQL</span></div>
                         </div>
                         <div class="project-card">
-                            <div class="project-title">코인 자동매매 프로그램<span class="badge outline">Fin-Tech</span></div>
+                            <div class="project-title" role="heading" aria-level="3">코인 자동매매 프로그램<span class="badge outline">Fin-Tech</span></div>
                             <div style="font-size: 0.8rem; color: var(--m3-outline); margin: 4px 0;">TradingView / Bybit / Google Cloud / Telegram Bot API 연동</div>
                             <p style="font-size: 0.85rem;">실시간으로 코인을 분석하여 웹훅을 통해 자동매매 및 봇 자동 알림, 텔레그램으로 서버와 봇 및 제어 프로그램</p>
                             <div class="tech-tags"><span class="tech-tag">PYTHON</span><span class="tech-tag">WEBHOOK</span><span class="tech-tag">TELEGRAM BOT</span></div>
@@ -397,7 +393,7 @@
                 </section>
 
                 <section id="section-skills">
-                    <h2>🎒 Skills & Tools</h2>
+                    <h2>Skills & tools</h2>
                     <div class="skills-container">
                         <div class="skill-box"><b>Languages</b>Kotlin, Java, Python, Dart, PHP</div>
                         <div class="skill-box"><b>Architecture</b>MVI, MVVM, Clean, Multi-Module</div>
@@ -406,46 +402,10 @@
                     </div>
                 </section>
 
-                <footer style="text-align: center; padding: 40px 0; color: var(--m3-outline); font-size: 0.8rem;">
-                    © 2026 Nam Young-hoon. Android Engineer Portfolio.
-                </footer>
-            </div>
-        </div>
-        <nav class="bottom-nav" id="bottomNav" aria-label="섹션 이동">
-            <button type="button" class="bottom-nav__btn is-active" data-section="portfolio-top" aria-current="page">
-                <span class="bottom-nav__icon" aria-hidden="true">🏠</span>
-                <span class="bottom-nav__label">홈</span>
-            </button>
-            <button type="button" class="bottom-nav__btn" data-section="section-about">
-                <span class="bottom-nav__icon" aria-hidden="true">👤</span>
-                <span class="bottom-nav__label">About</span>
-            </button>
-            <button type="button" class="bottom-nav__btn" data-section="section-experience">
-                <span class="bottom-nav__icon" aria-hidden="true">💼</span>
-                <span class="bottom-nav__label">경력</span>
-            </button>
-            <button type="button" class="bottom-nav__btn" data-section="section-toy">
-                <span class="bottom-nav__icon" aria-hidden="true">🧩</span>
-                <span class="bottom-nav__label">Toy</span>
-            </button>
-            <button type="button" class="bottom-nav__btn" data-section="section-skills">
-                <span class="bottom-nav__icon" aria-hidden="true">🛠</span>
-                <span class="bottom-nav__label">스킬</span>
-            </button>
-        </nav>
-        <button type="button" class="scroll-hint-fab" id="scrollHintFab" aria-label="아래로 더 보기" title="스크롤">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M6 9l6 6 6-6"/>
-            </svg>
-        </button>
-    </div>
 
-    <div class="screen-bottom-bezel" aria-hidden="true">
-        <div class="nav-handle"></div>
-    </div>
+    </main>
+    <footer class="site-footer"><p>더 나은 서비스를 함께 만들고 싶습니다.</p><a href="mailto:feelsogxxd@naver.com">feelsogxxd@naver.com <span aria-hidden="true">↗</span></a><div><span>© 2026 Nam Young-hoon.</span><a href="https://github.com/nyhoon" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#portfolio-top">맨 위로 ↑</a></div></footer>
 </div>
-
-
-    <script src="js/portfolio.js" defer></script>
+<script src="js/portfolio.js" defer></script>
 </body>
 </html>
