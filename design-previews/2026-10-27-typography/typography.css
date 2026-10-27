@@ -1,0 +1,54 @@
+/* Same A2 layout; compare reading size, spacing and font family. */
+:root { --ink: #202733; --muted: #4f5a69; }
+body { font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 400; }
+.t1 { --reading-size: 16px; --reading-leading: 1.8; }
+.t2 { --reading-size: 17px; --reading-leading: 1.85; font-family: 'Noto Sans KR', sans-serif; }
+.variant-back { font-size: 12px; font-weight: 600; color: var(--point); text-decoration: none; }
+.hero-name { font-weight: 700; letter-spacing: -1px; }
+h2 { font-weight: 700; letter-spacing: -.3px; }
+.hero-tagline { font-family: inherit; font-size: 12px; letter-spacing: .5px; }
+.exp-badge { font-size: 12px; font-weight: 600; }
+.phone-intro { font-size: 18px; font-weight: 600; letter-spacing: 0; }
+.status-badge { font-size: 13px; }
+.info-item { grid-template-columns: 54px minmax(0, 1fr); font-size: 14px; }
+.info-item b, .info-item-sub { font-family: inherit; font-size: 12px; }
+.contact-link { font-size: 14px; font-weight: 600; }
+.about-content, .skill-box, .toy-role-list, .hankki-copy .toy-role-list,
+.hankki-copy > p:not(.eyebrow), .project-card > p {
+    font-size: var(--reading-size) !important;
+    line-height: var(--reading-leading) !important;
+    letter-spacing: 0;
+    max-width: 65ch;
+}
+.project-card > p { margin-top: 18px; }
+.about-card--featured .about-content { font-size: 20px !important; font-weight: 600; }
+.company-name { font-size: 21px; font-weight: 700; letter-spacing: -.2px; }
+.company-desc, .company-info > div[style], .project-card > div[style] { font-size: 14px !important; line-height: 1.8; }
+.project-title { font-size: 20px; font-weight: 700; letter-spacing: -.2px; line-height: 1.55; }
+.project-card strong, .toy-role-list strong { font-weight: 600; }
+.badge { font-size: 12px; font-weight: 500; }
+.tech-tag { font-family: inherit; font-size: 12px; line-height: 1.5; }
+.link-btn, .text-link, .phone-release { font-size: 14px; }
+.bottom-nav__label { font-size: 13px; font-weight: 500; }
+.bottom-nav__btn.is-active .bottom-nav__label { font-weight: 700; }
+.skill-box b { font-family: inherit; font-size: 14px; }
+.visual-caption, .portfolio-footer { font-size: 13px; }
+.t2 .hero-name { font-size: 36px; letter-spacing: -.7px; }
+.t2 .project-title { line-height: 1.65; }
+.t2 .project-card { padding: 28px; }
+.t2 .hankki-feature { padding: 0; }
+@media (max-width: 800px) {
+    .company-name { font-size: 20px; }
+}
+@media (max-width: 600px) {
+    .hero-name, .t2 .hero-name { font-size: 29px; gap: 7px; letter-spacing: -.7px; }
+    .hero-tagline { font-size: 10px; }
+    .phone-intro { font-size: 17px; }
+    .info-item { grid-template-columns: 48px minmax(0, 1fr); }
+    .about-card--featured .about-content { font-size: 18px !important; }
+    .project-title { font-size: 19px; }
+    .project-card, .t2 .project-card { padding: 22px 18px; }
+    .hankki-feature, .t2 .hankki-feature { padding: 0; }
+    .badge, .tech-tag { font-size: 11px; }
+    .bottom-nav__label { font-size: 12px; }
+}
