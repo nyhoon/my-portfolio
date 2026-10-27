@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>남영훈 | Android Engineer Portfolio</title>
-    <meta name="description" content="Android 개발자 남영훈의 포트폴리오. 모바일 서비스 개발·운영 경험과 직접 출시한 오늘한끼, NeoFall, PocoPet 프로젝트를 소개합니다.">
+    <meta name="description" content="Android 개발자 남영훈의 포트폴리오. 모바일 서비스 개발·운영 경력과 직접 출시한 오늘한끼, NeoFall, PocoPet 프로젝트를 소개합니다.">
     <meta property="og:title" content="남영훈 | Android Engineer Portfolio">
     <meta property="og:description" content="모바일 앱 설계부터 출시, 운영까지. Android 개발자 남영훈의 경력과 개인 프로젝트.">
     <meta property="og:type" content="website">
@@ -15,32 +15,45 @@
 </head>
 <body>
 <a class="skip-link" href="#portfolio-top">본문으로 건너뛰기</a>
-<div class="site-shell">
-    <nav class="site-nav" aria-label="주요 메뉴"><a class="wordmark" href="#portfolio-top" aria-label="남영훈 포트폴리오 처음으로">NYH<span>.</span></a><div class="nav-links"><a href="#section-about">소개</a><a href="#section-experience">경력</a><a href="#section-toy">프로젝트</a><a href="#section-skills">스킬</a></div><a class="nav-contact" href="mailto:feelsogxxd@naver.com">연락하기 <span aria-hidden="true">↗</span></a></nav>
-    <main class="container">
+
+<main class="phone-frame" aria-label="남영훈 포트폴리오">
+    <div class="phone-notch"></div>
+    <div class="screen" id="phoneScreen">
+        <div class="screen-scroll" id="screenScroll" tabindex="0" role="region" aria-label="포트폴리오 본문">
+            <div class="screen-top-chrome">
+                <div class="status-bar">
+                    <span class="js-status-clock">00:00</span>
+                    <div style="display: flex; gap: 8px;">
+                        <span aria-hidden="true">LTE</span>
+                        <span aria-hidden="true">100%</span>
+                    </div>
+                </div>
+                <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="페이지 스크롤 진행">
+                    <div class="scroll-progress__fill" id="scrollProgressFill"></div>
+                </div>
+            </div>
+
+            <div class="container">
                 <header id="portfolio-top">
                     <div class="header-top">
-                        <div class="name-area">
+                        <div class="name-area"><div class="profile-avatar" aria-hidden="true">NYH<span>.</span></div>
                             <div class="header-hero-row">
                                 <p class="hero-tagline">ANDROID ENGINEER</p>
-                                <div class="status-badge">1992.02.20 · 기혼 · 의무경찰 만기제대</div>
+                                <div class="status-badge">1992.02.20 / 기혼 / 의무경찰 만기제대</div>
                             </div>
-                            <h1 class="hero-name">남영훈<span class="hero-name-en">Younghoon Nam</span></h1>
-                            <p class="hero-statement">만드는 것에서 끝내지 않고,<br>쓰이는 서비스로.</p>
-                            <p class="hero-description">Android Engineer · 7년차<br>모바일 앱 설계부터 출시, 운영까지 함께합니다.</p>
-                            <a class="hero-cta" href="#project-today-hankki">최근 출시한 오늘한끼 보기 <span aria-hidden="true">↗</span></a>
+                            <h1 class="hero-name">남영훈 <span class="exp-badge">7&nbsp;년차</span></h1><p class="phone-intro">모바일 앱 설계부터 출시, 운영까지.</p>
                         </div>
                     </div>
-                    <div class="personal-info">
+<div class="personal-info">
                         <div class="info-item"><b>E-mail</b> <a class="contact-link" href="mailto:feelsogxxd@naver.com">feelsogxxd@naver.com</a></div>
                         <div class="info-item"><b>Phone</b> <a class="contact-link" href="tel:+821071927102">010-7192-7102</a></div>
                         <div class="info-item info-item--edu">
-                            <b>High school</b>
+                            <b>High</b>
                             <span>흥진고등학교 졸업</span>
                             <div class="info-item-sub">2007.03 - 2010.01 졸업</div>
                         </div>
                         <div class="info-item info-item--edu">
-                            <b>University</b>
+                            <b>Univ</b>
                             <span>국립한국교통대 소프트웨어학 학사</span>
                             <div class="info-item-sub">2012.03 - 2019.02 졸업</div>
                         </div>
@@ -243,8 +256,8 @@
                     </div>
                 </section>
 
-                <section id="section-toy">
-                    <h2>Toy projects</h2>
+<section id="section-toy">
+                    <h2>Toy projects</h2><div class="toy-entry"><a class="phone-release" href="#project-today-hankki">새로 출시한 오늘한끼 보기 ↗</a><div class="phone-launches"><a href="#project-today-hankki"><img src="assets/today-hankki-home.webp" width="1080" height="2400" alt=""><span>오늘한끼<br>재료·소비기한 관리 ↗</span></a><a href="#project-neofall"><img src="assets/neofall-icon.webp" width="512" height="512" alt=""><span>NeoFall<br>무한 낙하 아케이드 ↗</span></a></div></div>
                     <div class="toy-grid">
                         <article class="project-card toy-card--featured hankki-feature" id="project-today-hankki" aria-labelledby="hankki-title">
                             <div class="hankki-copy">
@@ -268,7 +281,7 @@
                             </div>
                         </article>
 
-                                                <div class="project-card toy-card--featured">
+                                                <div class="project-card toy-card--featured neo-feature" id="project-neofall">
                             <div class="project-title" role="heading" aria-level="3">
                                 NEOFALL — INFINITE FALL
                                 <div class="badge-group">
@@ -286,7 +299,7 @@
                                 1K+ DOWNLOADS · GOOGLE PLAY · LIVE
                             </div>
 
-                            <p style="font-size: 0.9rem; line-height: 1.55; margin: 0;">
+<div class="neo-media"><figure class="neo-promo"><img src="assets/neofall-promo.webp" width="1488" height="720" alt="NeoFall 공식 프로모션 이미지: 네온 플랫폼 사이로 낙하하는 캐릭터" loading="lazy"><figcaption>프로모션 이미지</figcaption></figure><div class="neo-gameplay"><img src="assets/neofall-play-1.webp" width="828" height="1800" alt="NeoFall 실제 플레이: 유성 캐릭터와 플랫폼" loading="lazy"><img src="assets/neofall-play-2.webp" width="828" height="1800" alt="NeoFall 실제 플레이: 충돌하는 플랫폼" loading="lazy"><img src="assets/neofall-play-3.webp" width="828" height="1800" alt="NeoFall 실제 플레이: 터치로 이동하는 캐릭터" loading="lazy"></div></div>                            <p style="font-size: 0.9rem; line-height: 1.55; margin: 0;">
                                 <strong>네온 세계를 끝없이 낙하하며 생존하는 아케이드 게임</strong>입니다.
                                 터치 또는 자이로 센서로 캐릭터를 조작하고,
                                 다양한 플랫폼과 장애물을 피하며 최대 낙하 깊이와 점수를 경쟁합니다.
@@ -391,9 +404,8 @@
                         </div>
                     </div>
                 </section>
-
                 <section id="section-skills">
-                    <h2>Skills & tools</h2>
+                    <h2>Skills & Tools</h2>
                     <div class="skills-container">
                         <div class="skill-box"><b>Languages</b>Kotlin, Java, Python, Dart, PHP</div>
                         <div class="skill-box"><b>Architecture</b>MVI, MVVM, Clean, Multi-Module</div>
@@ -402,10 +414,41 @@
                     </div>
                 </section>
 
+                <footer class="portfolio-footer">
+                    © 2026 Nam Young-hoon. Android Engineer Portfolio.
+                </footer>
+            </div>
+        </div>
+        <nav class="bottom-nav" id="bottomNav" aria-label="섹션 이동">
+            <a class="bottom-nav__btn is-active" data-section="portfolio-top" href="#portfolio-top" aria-current="location">
+                <span class="bottom-nav__icon" aria-hidden="true"><img src="assets/icons/house.svg" alt="" width="21" height="21"></span>
+                <span class="bottom-nav__label">홈</span>
+            </a>
+            <a class="bottom-nav__btn" data-section="section-about" href="#section-about">
+                <span class="bottom-nav__icon" aria-hidden="true"><img src="assets/icons/user-round.svg" alt="" width="21" height="21"></span>
+                <span class="bottom-nav__label">About</span>
+            </a>
+            <a class="bottom-nav__btn" data-section="section-experience" href="#section-experience">
+                <span class="bottom-nav__icon" aria-hidden="true"><img src="assets/icons/briefcase-business.svg" alt="" width="21" height="21"></span>
+                <span class="bottom-nav__label">경력</span>
+            </a>
+            <a class="bottom-nav__btn" data-section="section-toy" href="#section-toy">
+                <span class="bottom-nav__icon" aria-hidden="true"><img src="assets/icons/blocks.svg" alt="" width="21" height="21"></span>
+                <span class="bottom-nav__label">Toy</span>
+            </a>
+            <a class="bottom-nav__btn" data-section="section-skills" href="#section-skills">
+                <span class="bottom-nav__icon" aria-hidden="true"><img src="assets/icons/wrench.svg" alt="" width="21" height="21"></span>
+                <span class="bottom-nav__label">스킬</span>
+            </a>
+        </nav>
 
-    </main>
-    <footer class="site-footer"><p>더 나은 서비스를 함께 만들고 싶습니다.</p><a href="mailto:feelsogxxd@naver.com">feelsogxxd@naver.com <span aria-hidden="true">↗</span></a><div><span>© 2026 Nam Young-hoon.</span><a href="https://github.com/nyhoon" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#portfolio-top">맨 위로 ↑</a></div></footer>
-</div>
-<script src="js/portfolio.js" defer></script>
+    </div>
+
+    <div class="screen-bottom-bezel" aria-hidden="true">
+        <div class="nav-handle"></div>
+    </div>
+</main>
+
+    <script src="js/portfolio.js" defer></script>
 </body>
 </html>
