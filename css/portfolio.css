@@ -127,10 +127,10 @@ header {
     box-shadow: 0 2px 8px #23314d04;
 }
 .header-top { min-width: 0; }
-.name-area { display: grid; grid-template-columns: 62px minmax(0, 1fr); align-items: center; gap: 10px 17px; }
+.name-area { display: grid; grid-template-columns: 72px minmax(0, 1fr); align-items: center; gap: 10px 17px; }
 .header-hero-row { display: contents; }
-.profile-avatar { position: relative; display: grid; place-items: center; grid-column: 1; grid-row: 1 / span 2; width: 62px; height: 62px; border: 1px solid var(--line); border-radius: 50%; background: var(--soft); font-size: 19px; font-weight: 750; letter-spacing: -1px; }
-.profile-avatar span { position: absolute; right: 10px; bottom: 12px; color: var(--point); }
+.profile-avatar { position: relative; display: grid; place-items: center; grid-column: 1; grid-row: 1 / span 2; width: 72px; height: 92px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: white; }
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .hero-tagline { grid-column: 2; grid-row: 1; margin: 0; color: var(--muted); font: 600 10px/1.5 ui-monospace, monospace; letter-spacing: .6px; }
 .hero-name { display: flex; align-items: center; flex-wrap: wrap; grid-column: 2; grid-row: 2; gap: 10px; margin: 0; font-size: 38px; line-height: 1.15; font-weight: 750; letter-spacing: -1.8px; }
 .exp-badge { display: inline-flex; flex: none; padding: 5px 9px; border: 1px solid var(--point-line); border-radius: 6px; background: var(--point-soft); color: var(--point); font-size: 11px; font-weight: 650; letter-spacing: 0; white-space: nowrap; }
@@ -270,9 +270,8 @@ h2::after { color: var(--point); font: 500 11px ui-monospace, monospace; }
     .nav-handle { width: 78px; height: 3px; }
     .container { padding: 20px 14px 36px; }
     header { padding: 24px 18px; gap: 22px; border-radius: 12px; margin-bottom: 32px; }
-    .name-area { grid-template-columns: 52px minmax(0, 1fr); gap: 9px 12px; }
-    .profile-avatar { width: 52px; height: 52px; font-size: 17px; }
-    .profile-avatar span { right: 8px; bottom: 9px; }
+    .name-area { grid-template-columns: 60px minmax(0, 1fr); gap: 9px 12px; }
+    .profile-avatar { width: 60px; height: 78px; }
     .hero-name { font-size: 31px; gap: 8px; letter-spacing: -1.4px; }
     .hero-tagline { font-size: 9px; }
     .exp-badge { font-size: 10px; padding: 4px 7px; }

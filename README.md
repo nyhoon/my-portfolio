@@ -21,6 +21,7 @@
 - `js/portfolio.js`: 내부 스크롤 진행률, 현재 메뉴 강조, 앵커 및 브라우저 탐색 기록 동기화. JavaScript가 없어도 앵커와 본문은 동작합니다.
 - `assets/today-hankki-*.webp`: 예시 재고가 포함된 실제 앱 캡처.
 - `assets/neofall-*.webp`: 기존 게임 아이콘, 실제 플레이 캡처, 프로모션 이미지.
+- `assets/profile.png`: 사용자가 제공한 프로필 사진. 원본 비율에 맞춘 세로형 프레임으로 표시합니다.
 - `assets/icons/`: [Lucide](https://github.com/lucide-icons/lucide) SVG와 라이선스.
 - `design-previews/`: 이전 비교 시안 보관. B/C/D는 `editorial-base.css`와 `editorial-nav.js`를 사용해 최종 메인의 스타일 변경에 영향받지 않습니다.
 - `tests/navigation.test.cjs`: 메뉴 선택, 진행률, 마지막 섹션, 브라우저 기록, 없는 앵커, 홈 복귀 회귀 검사. Node 표준 라이브러리만 사용합니다.
