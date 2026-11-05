@@ -26,7 +26,7 @@
 - `design-previews/`: 이전 비교 시안 보관. B/C/D는 `editorial-base.css`와 `editorial-nav.js`를 사용해 최종 메인의 스타일 변경에 영향받지 않습니다.
 - `tests/navigation.test.cjs`: 메뉴 선택, 진행률, 마지막 섹션, 브라우저 기록, 없는 앵커, 홈 복귀 회귀 검사. Node 표준 라이브러리만 사용합니다.
 
-새 다운로드 수나 성과 수치를 추가하지 않았습니다. 오늘한끼는 Google Play 출시를 소개하며 iOS 스토어 출시나 OCR 완전 정확도를 주장하지 않습니다.
+새 다운로드 수나 성과 수치를 추가하지 않았습니다. 오늘한끼는 Google Play(2026.10)·App Store(2026.11) 출시를 소개합니다. App Store 주소는 https://apps.apple.com/kr/app/id6828321515 입니다. OCR 완전 정확도나 미확인 성과 수치는 주장하지 않습니다.
 
 ## 로컬 확인
 
